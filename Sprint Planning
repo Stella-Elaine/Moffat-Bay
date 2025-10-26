@@ -1,0 +1,193 @@
+ Sprint 1  Planning & Design M 3 4
+Goal: Finalize project design and database schema.
+Tasks:
+
+
+Create prototypes for all pages (Frontend)
+
+
+Create Landing page mockup (Frontend)
+
+
+Design ERD in Lucidchart/Draw.io/Visio (Backend)
+
+
+Schedule instructor meeting for approval (Lead)
+
+
+Upload ERD PDF and mockups (Lead)
+
+
+Update Kanban board
+Deliverables:   ERD.pdf
+
+
+Output: Instructor approval required before development begins.
+
+
+
+ Sprint 2  Database Development Module 5
+Goal: Create and test the database.
+Tasks:
+
+
+Build MySQL schema: users, reservations
+
+
+Populate test data (3 entries per table)
+
+
+Run and screenshot SELECT * FROM output
+
+
+Update ERD if schema changes
+
+
+Upload .sql scripts and screenshots
+
+
+Deliverables:  database schema.sql, 
+Output: Working MySQL instance aligned with ERD.
+
+
+ Sprint 3 Web Dev part one M 6
+Goal: Build foundation pages and authentication.
+Tasks:
+
+
+Create Landing page (Frontend)
+
+
+Create Registration page + backend (Frontend/Backend)
+
+
+Create Login page + backend + session (Backend)
+
+
+Create 6 functional tests (QA)
+
+
+Document and screenshot tests (Lead)
+
+
+Deliverables:  landing.html, register.html, login.html
+
+
+Output: Users can register/login and view landing page.
+
+
+ Sprint 4  Web Dev M 7
+Goal: Build reservation system.
+Tasks:
+
+
+Create Reservation page (Frontend/Backend)
+
+
+Add form validation for guest count and room type
+
+
+Save reservations to MySQL
+
+
+Create 4 functional tests + documentation
+
+
+Deliverables:
+eservation.html,  api and reservations.js
+
+
+Output: Fully functional reservation workflow.
+
+
+Sprint 5  Web Dev  Module 8
+Goal: Build About and Summary pages.
+Tasks:
+
+
+Develop About Us static page (Frontend)
+
+
+Develop Reservation Summary with cancel/confirm logic (Backend)
+
+
+Write 4 functional tests
+
+
+Deliverables:
+About.html, Summary.html
+
+
+Output: Users can confirm or cancel reservations; see summary data.
+
+
+ Sprint 6  Web Dev M 9
+Goal: Complete Contact and Lookup pages.
+Tasks:
+
+
+Build Contact Us static page (Frontend)
+
+
+Build Reservation Lookup by email or ID (Backend)
+
+
+Write 4 functional tests
+
+
+Screenshots of successful test runs
+
+
+Deliverables: Contact.html, Lookup.html
+
+
+Output: Lookup and contact workflows operational.
+
+
+
+ Sprint 7  Web Dev V M 10
+Goal: Add Attractions page and finalize development.
+Tasks:
+
+
+Create Attractions page (Frontend)
+
+
+Add backend handling if dynamic content added
+
+
+Write 2 functional tests + screenshots
+
+
+Finalize internal QA handoff
+
+
+Deliverables: Attractions.html
+
+
+Output: All pages functional; ready for presentation prep.
+
+
+ Sprint 8  QA & Delivery M 11–12
+Goal: Deliver final presentation, demo, and peer reviews.
+Tasks:
+
+
+Create PowerPoint presentation (Lead)
+
+
+Capture screen demo with voice-over (Frontend)
+
+
+Summarize 5 test results + lessons learned (Backend + QA)
+
+
+Post in QA forum and complete peer reviews
+
+
+Apply feedback and zip final project for submission
+
+
+Deliverables: presentation recordings zip
+Output: ready submission package.
+
