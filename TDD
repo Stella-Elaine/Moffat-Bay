@@ -1,0 +1,23 @@
+ Technical Design Document Moffat Bay Lodge
+
+ # 1. Introduction of Team : 
+ Kypton 
+ Stella 
+ Julio 
+
+ # 1.1 Purpose
+Define and deliver a secure, easy-to-use web application for Moffat Bay Lodge
+ that enables guests to browse public pages, register/log in, book a room (with confirmation to MySQL), and look up prior reservations. 
+ The TDD clarifies scope, personas, user stories, priorities, and initial work estimates to support agile planning and Kanban execution for a three-person  team.
+
+ # 1.2 Terminology
+- Customer/User: Site visitor; may register and log in to make/find reservations.  
+- Reservation: A record with room type, guests, check-in/out, and total cost.  
+- Session: Server-managed login state that gates access to reservation actions.  
+- Registration: Creation of an account using email (username) + password.  
+- Password Hashing: Secure storage.   
+- MySQL: Relational database for users and reservations.  
+- Reservation ID: Unique identifier returned after confirmed booking.  
+- Lodge Room Types: double full, queen, double queen, king; fixed nightly rates.
+
+
