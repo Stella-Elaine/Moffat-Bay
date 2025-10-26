@@ -1,138 +1,134 @@
+
+
+TDD / Persona’s / Work Estimations 
+
+
+
  1.3 User Personas
 
- Persona P1: Leah travel agent (Age 33)
-Scenario:  traveler booking  weekend getaways for multiple rooms.
-Motivation: Wants a simple, mobile-friendly booking process.
-Frustrations: Long registration forms or forced payment fields.
+Persona P1  Leah  Travel Agent Age 33
+Scenario: Books weekend getaways and small group trips for clients, typically one room per booking.  
+Motivation: Wants a simple, mobile-friendly reservation flow that allows her to preview pricing and confirm rooms quickly.  
+Frustrations: Overly long registration forms, unclear nightly rates, or lack of confirmation feedback.  
 
- Persona P2: Sam and Ashley (Ages 42 & 40)
-Scenario: Parents booking for family vacations.
-Motivation: Need clear pricing, room capacity validation, and family-friendly and pet attractions.
-Frustrations: Complex forms and unclear guest limits.
 
-Persona P3: Ron Repeat client (Age 62)
-Scenario: Repeat visitor booking multiple times per year.
-Motivation: Desires quick login and easy reservation lookup.
-Frustrations: Re-entering information is annoying, wants to have a portal that saves his information forfuture. 
+      
 
- Persona P4: Kyle - digital nomad (Age 27)
-Scenario: Remote worker traveling monthly with variable connectivity.
-Motivation: Needs fast, mobile-optimized booking and work-friendly amenity details.
-Frustrations: Poor mobile UX and losing confirmation emails while abroad.
+
+
+ Persona P2  Sam & Ashley Parents, Ages 32 & 30
+Scenario: Parents planning family vacations with two children.  
+Motivation: Need clear room-capacity validation, pricing transparency, and accurate attraction details (e.g., hiking, kayaking, whale-watching).  
+Frustrations: Complex forms, unclear guest limits, or missing family-friendly information.  
+
+
+ Persona P3  Ron the Repeat Guest Age 62
+Scenario:Returns to Moffat Bay multiple times each year for fishing and relaxation.  
+Motivation Wants fast login, saved profile information, and an easy way to look up previous reservations.  
+Frustrations Re-entering contact information or forgetting login credentials.  
+
+
+
+
+ Persona P4  Kyle the Digital Nomad Age 24
+Scenario: Remote worker who travels monthly with varying internet quality.  
+Motivation: Needs a mobile-optimized experience, dependable connectivity for booking, and quick visibility of work-friendly amenities.  
+Frustrations: Slow-loading pages, forms that time out, or missing Wi-Fi and workspace details.  
+
+
 
 
  1.4 User Stories 
 
- P1 – Leah travel agent 
-US-1 — Public Site Access 
+P1  Leah Travel Agent
+
+User Story 1  Public Site Access 
 Given I am a visitor on the Moffat Bay Lodge website  
 When I navigate to the Landing, About, Contact, or Attractions pages  
-Then I should see lodge information without being asked to log in.
+Then I should see lodge information without being asked to log in.  
 
-US-2 — Secure Registration  
+US-2  Secure Registration  
 Given I am a new visitor on the Registration page  
-When I enter my email, name, phone number, and a valid password  
-Then my account should be created, my password hashed, and I should see a message confirming successful registration.
+When I enter my email, name, phone, and a valid password that meets complexity rules  
+Then my account should be created, my password hashed, and a success message displayed.  
 
-US-3 — Booking and Price Summary  
-Given I am a logged-in user on the Reservation/Attractions page  I should see several dates and rooms for multiple bookings 
+US-3  Booking and Price Summary  
+Given I am a logged-in user on the Reservation page  
 When I select my room type, number of guests, and check-in/check-out dates  
-Then I should see a price summary showing the nightly rate, total cost, and a “Confirm Reservation” button.
+Then I should see a single-booking price summary showing the nightly rate, total cost, and a Confirm Reservation button.  
 
- P2 – Ashley and Sam ,Parents
-US-4 — Guest Count Validation  
+ P2  Sam & Ashley (Parents)
+
+US-4  Guest Count Validation 
 Given I am filling out the reservation form  
-When I  click a check box that filters for places that accept dogs and offer cribs
-Then I should see an new prompting me to choose a larger room or places that allow pets
+When I enter a guest count that exceeds the allowed room capacity  
+Then I should see an error message prompting me to select a larger room type.  
 
-US-5 — Reservation Summary Review  
+US-5  Reservation Summary Review  
 Given I have completed my reservation selections  
-When I click “Review Reservation”  
-Then I should see a summary of all choices with options to Cancel or Submit.
+When I click Review Reservation  
+Then I should see a summary of all choices with options to Cancel or Submit.  
 
-US-6 — Reservation Lookup 
+US-6  Reservation Lookup 
 Given I am a registered user who has already made a reservation  
 When I enter my Reservation ID or email address on the Lookup page  
-Then I should see my room type, number of guests, check-in/check-out dates, and total price.
+Then I should see my room type, number of guests, check-in/check-out dates, and total price.  
 
-P3 – Ron - return guest 
-US-7 — Login and Session Management  
+P3 Ron the Repeat Guest
+
+US-7  Login and Session Management
 Given I have an existing account  
 When I enter my email and password on the Login page  
-Then I should be logged in, and my order histroy should be visable in my account while  logged in.
+Then I should be logged in and maintain a session while accessing reservation features.  
 
-US-8 — Booking Registration
-Given I am chosing to return to a hotel/attraction 
-When I click on an old booking 
-Then all room preferences should be  useable to create a new validated and sanitized bookings with new dates. 
+US-8  Re-Booking Convenience - Possible Future Enhancement?
+Given I am reviewing a past reservation  
+Whe I click  button Book Again  
+Then my prior room preferences should auto-fill new dates and guests.  
+Optional Could Have  feature for future release.  
 
-US-9 — Mobile Responsiveness**  
+US-9  Mobile Responsiveness 
 Given I am visiting the site from a mobile device  
-When I navigate through pages or forms  
-Then the layout should adjust to my screen size with accessible buttons and readable text.
+When I navigate pages or forms  
+Then the layout should adapt to my screen size with readable text and touch-friendly buttons.  
 
- P4 – Klye - digital nomad 
-US-10 — Mobile Booking Flow  
+P4  Kyle the Digital Nomad
+
+US-10  Mobile Booking Flow  
 Given I am using a smartphone with limited connectivity  
 When I log in and attempt to make a reservation  
-Then I should see mobile-optimized layouts.
+Then I should see a mobile-optimized layout, and if a network error occurs, my form data should be preserved for retry.  
 
-US-11 — Work-Friendly Amenity Display  
-Given I am viewing a room type or attraction page  
+US-11  Work-Friendly Amenity Display  
+Given I am viewing a room type or Attraction page  
 When I check for amenities  
-Then I should see icons or text indicating Wi-Fi, desk space, and quiet hours.
+Then I should see icons or text indicating Wi-Fi availability, workspace, and quiet hours.  
 
-US-12 — Multiple Device/ session   
+US-12  Cross-Device Lookup with Verification  
 Given I am on a new device and not logged in  
 When I search for my reservation using my email or Reservation ID  
-Then I should not  see my booking details without logging in or verifying identity via email/password. 
-
-
- 1.5 Work Estimations (stories)
-
- Subtask/ Story Hours we may not have time to do all of these and need to simplify it- 
-
-US-2 — Secure Registration (10 hours)  
-Given the user is on the registration page  
-When they submit valid details  
-Then their password is hashed and user record created  
-  Build Registration UI (2h)  
-  Add client validation + regex checks (1h)  
-  Implement `/api/register` route (2h)  
-  Hash password with Argon2/bcrypt + DB insert (3h)  
-  Confirmation message and error handling (2h)
-
-US-7 — Login & Session (~9 hours)  
-Given a user exists in the database  
-When they log in successfully  
-Then a secure session token is created  
- Build Login UI (1.5h)  
- Implement `/api/login` route (2h)  
-   Add session middleware for protected routes (3h)  
-   Logout endpoint and messages (1.5h)  
-   Test session persistence (1h)
-
-US-3 — Booking and Confirmation (~14 hours)  
-Given a logged-in user fills out the booking form  
-When they confirm reservation  
-Then details are stored in MySQL and summary shown  
-  Build Reservation UI (3h)  
-  Validate guests/dates (1.5h)  
-   Implement `/api/reservations/quote` (2h)  
-  Create Summary & Confirmation pages (3h)  
- Insert reservation record (2.5h)  
-Confirmation view (1h)  
- Unit tests (2h)
+Then I should be prompted to verify my identity before viewing booking details.  
 
 
 
 
- 2. Design
- 2.1 Prototypes
-TBA 
- 2.2 ERD
-TBA 
+OverView of Sprint work 
 
- 3. QA Testing
- 3.1 QA Test Plan
-TBA 
+Sprint 1 
+ Modules 3–4  Prototypes + ERD Planning baseline for US-1 through US-3  
+Sprint 2   
+Module 5  Database Development  Supports US-2, US-3, US-6 
+Sprint 3 
+Module 6  Landing + Registration + Login  US-1, US-2, US-7 
+Sprint 4 
+Module  7 Reservation Page US-3, US-4 
+Sprint 5 
+Module  8  About + Reservation Summary US-5 
+Sprint 6
+Module  9  Contact + Lookup Reservation US-6, US-12 
+Sprint 7
+Module  10  Attractions Page + Amenities US-9, US-10, US-11 
+Sprint 8 
+11–12  QA Testing + Presentation  All stories validated 
+
+
