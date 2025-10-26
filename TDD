@@ -5,19 +5,24 @@
  Stella 
  Julio 
 
- # 1.1 Purpose
-Define and deliver a secure, easy-to-use web application for Moffat Bay Lodge
- that enables guests to browse public pages, register/log in, book a room (with confirmation to MySQL), and look up prior reservations. 
- The TDD clarifies scope, personas, user stories, priorities, and initial work estimates to support agile planning and Kanban execution for a three-person  team.
 
- # 1.2 Terminology
-- Customer/User: Site visitor; may register and log in to make/find reservations.  
-- Reservation: A record with room type, guests, check-in/out, and total cost.  
-- Session: Server-managed login state that gates access to reservation actions.  
-- Registration: Creation of an account using email (username) + password.  
-- Password Hashing: Secure storage.   
-- MySQL: Relational database for users and reservations.  
-- Reservation ID: Unique identifier returned after confirmed booking.  
-- Lodge Room Types: double full, queen, double queen, king; fixed nightly rates.
+ 1.1 Purpose
+This Technical Design Document defines the structure and behaviors for the Moffat Bay Lodge Web Application.  
+The purpose is to outline functional requirements in a Given–When–Then format to support Behavior-Driven Development  and future Quality Assurance test automation.  
+The project enables customers to browse public pages, register, log in, make reservations, and look up bookings within a MySQL-backed Node.js environment.
+
+ 1.2 Terminology
+Customer/User: A person visiting the site, optionally registered, who can make or view reservations.  
+Reservation: A booking record containing room type, guests, check-in/out, and calculated total.  
+Session: Temporary login state stored securely on the server for an authenticated user.  
+Registration: Creation of a user profile using an email address and password that meets security standards.  
+Password Hashing: Secure one-way storage using bcrypt or Argon2 per OWASP best practices. Look into base64ncode/ 2FA auth 
+MySQL: Relational database system storing users and reservations.  
+Reservation ID: A unique identifier generated upon confirmation of a booking.  
+Room Types: Double Full, Queen, Double Queen, King , Room with balcony for pets— each with fixed nightly rates.
+AMENTIES: Desks in room, Free wifi upgrades, cafe/bistro downstairs in lobby , pool side, gym, 
 
 
+Branching Strategy: USe github and push to  `main` on seperate feature branches?? 
+Local Setup: Clone repo in personal dev folder and symlink/junction to Tomcat `/webapps/MoffatBay`.  
+Testing Approach:  Typical to use thes same Given–When–Then story becomes a QA test script in Section 3.1.
