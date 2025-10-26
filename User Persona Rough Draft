@@ -5,7 +5,7 @@ Scenario:  traveler booking  weekend getaways for multiple rooms.
 Motivation: Wants a simple, mobile-friendly booking process.
 Frustrations: Long registration forms or forced payment fields.
 
- Persona P2: Sam and Stella (Ages 42 & 40)
+ Persona P2: Sam and Ashley (Ages 42 & 40)
 Scenario: Parents booking for family vacations.
 Motivation: Need clear pricing, room capacity validation, and family-friendly and pet attractions.
 Frustrations: Complex forms and unclear guest limits.
@@ -39,7 +39,7 @@ Given I am a logged-in user on the Reservation/Attractions page  I should see se
 When I select my room type, number of guests, and check-in/check-out dates  
 Then I should see a price summary showing the nightly rate, total cost, and a “Confirm Reservation” button.
 
- P2 – Aaron & Maya,Parents
+ P2 – Ashley and Sam ,Parents
 US-4 — Guest Count Validation  
 Given I am filling out the reservation form  
 When I  click a check box that filters for places that accept dogs and offer cribs
@@ -71,7 +71,7 @@ Given I am visiting the site from a mobile device
 When I navigate through pages or forms  
 Then the layout should adjust to my screen size with accessible buttons and readable text.
 
- P4 – Kai - digital nomad 
+ P4 – Klye - digital nomad 
 US-10 — Mobile Booking Flow  
 Given I am using a smartphone with limited connectivity  
 When I log in and attempt to make a reservation  
