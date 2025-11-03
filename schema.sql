@@ -89,7 +89,7 @@ CREATE TABLE reservation_rooms (
     ON UPDATE RESTRICT ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- Helpful indexes for lookups & reports
+-- Idexes for lookups & reports
 CREATE INDEX idx_res_customer ON reservations(customer_id);
 CREATE INDEX idx_res_dates ON reservations(check_in, check_out);
 CREATE INDEX idx_room_roomtype ON rooms(room_type_id);
@@ -98,8 +98,6 @@ CREATE INDEX idx_rr_res ON reservation_rooms(reservation_id);
 
 -- =======================
 -- Seed Data
--- =======================
-
 -- Room types and prices per assignment
 INSERT INTO room_types (type_name, rate, max_guests, description) VALUES
   ('Double Full', 120.00, 2, 'Cozy option for compact stays.'),
@@ -107,25 +105,23 @@ INSERT INTO room_types (type_name, rate, max_guests, description) VALUES
   ('Double Queen',150.00, 4, 'Great for families or friends.'),
   ('King',        160.00, 2, 'Spacious comfort with king bed.');
 
--- Sample physical rooms (adjust counts as you like)
--- Double Full: DF101-DF110 (10 rooms)
+-- Demo physical rooms (adjust counts as you like)
+-- Double Full: DF101-DF105 (5 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
-  (1,'DF101'),(1,'DF102'),(1,'DF103'),(1,'DF104'),(1,'DF105'),
-  (1,'DF106'),(1,'DF107'),(1,'DF108'),(1,'DF109'),(1,'DF110');
+  (1,'DF101'),(1,'DF102'),(1,'DF103'),(1,'DF104'),(1,'DF105');
 
--- Queen: Q201-Q210 (10 rooms)
+-- Queen: Q201-Q205 (5 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
-  (2,'Q201'),(2,'Q202'),(2,'Q203'),(2,'Q204'),(2,'Q205'),
-  (2,'Q206'),(2,'Q207'),(2,'Q208'),(2,'Q209'),(2,'Q210');
+  (2,'Q201'),(2,'Q202'),(2,'Q203'),(2,'Q204'),(2,'Q205');
 
--- Double Queen: DQ301-DQ308 (8 rooms)
+-- Double Queen: DQ301-DQ308 (5 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
   (3,'DQ301'),(3,'DQ302'),(3,'DQ303'),(3,'DQ304'),
-  (3,'DQ305'),(3,'DQ306'),(3,'DQ307'),(3,'DQ308');
+  (3,'DQ305');
 
--- King: K401-K406 (6 rooms)
+-- King: K401-K406 (5 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
-  (4,'K401'),(4,'K402'),(4,'K403'),(4,'K404'),(4,'K405'),(4,'K406');
+  (4,'K401'),(4,'K402'),(4,'K403'),(4,'K404'),(4,'K405');
 
 -- (Optional) Demo customer — replace hash in app at runtime
 -- INSERT INTO customers (first_name,last_name,email,telephone,password_hash)
