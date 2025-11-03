@@ -17,7 +17,7 @@ GRANT ALL PRIVILEGES ON moffat_bay.* TO 'student'@'%';
 FLUSH PRIVILEGES;
 
 -- =======================
--- Tables (Final ERD)
+-- Tables 
 -- =======================
 
 -- Customers
@@ -56,7 +56,7 @@ CREATE TABLE rooms (
     ON UPDATE RESTRICT ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- Reservations (one reservation may include one or more room assignments via reservation_rooms)
+-- Reservations (one reservation may include one or more room assignments from reservation_rooms)
 DROP TABLE IF EXISTS reservations;
 CREATE TABLE reservations (
   reservation_id  INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,7 +75,7 @@ CREATE TABLE reservations (
   CONSTRAINT ck_res_guests CHECK (num_guests > 0)
 ) ENGINE=InnoDB;
 
--- Junction: reservation ↔ rooms (supports assigning specific rooms)
+-- Junction: reservation ↔ rooms (helper of assigning specific rooms)
 DROP TABLE IF EXISTS reservation_rooms;
 CREATE TABLE reservation_rooms (
   reservation_id  INT NOT NULL,
@@ -129,4 +129,4 @@ INSERT INTO rooms (room_type_id, room_number) VALUES
 
 -- (Optional) Demo customer — replace hash in app at runtime
 -- INSERT INTO customers (first_name,last_name,email,telephone,password_hash)
--- VALUES ('Demo','User','demo@moffatbay.com','360-555-0148','<BCRYPT_OR_ARGON2_HASH>');
+-- VALUES ('Demo','User','demo@moffatbay.com','202-552-1633','<MADE_UP_PASSWORD_HASH>');
