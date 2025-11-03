@@ -75,7 +75,7 @@ CREATE TABLE reservations (
   CONSTRAINT ck_res_guests CHECK (num_guests > 0)
 ) ENGINE=InnoDB;
 
--- Junction: reservation ↔ rooms (helper of assigning specific rooms)
+-- Junction: reservation - >  rooms (helper of assigning specific rooms)
 DROP TABLE IF EXISTS reservation_rooms;
 CREATE TABLE reservation_rooms (
   reservation_id  INT NOT NULL,
@@ -105,7 +105,7 @@ INSERT INTO room_types (type_name, rate, max_guests, description) VALUES
   ('Double Queen',150.00, 4, 'Great for families or friends.'),
   ('King',        160.00, 2, 'Spacious comfort with king bed.');
 
--- Demo physical rooms (adjust counts as you like)
+-- physical room capacity 
 -- Double Full: DF101-DF105 (5 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
   (1,'DF101'),(1,'DF102'),(1,'DF103'),(1,'DF104'),(1,'DF105');
@@ -123,6 +123,18 @@ INSERT INTO rooms (room_type_id, room_number) VALUES
 INSERT INTO rooms (room_type_id, room_number) VALUES
   (4,'K401'),(4,'K402'),(4,'K403'),(4,'K404'),(4,'K405');
 
--- (Optional) Demo customer — replace hash in app at runtime
+
+
+--  Kypton's query for confirming conflicts with dates and room_types. 
+-- Given a room and a requested date range, it shows conflicts
+SELECT rr.room_id, r.reservation_id, r.check_in, r.check_out, r.status
+FROM reservation_rooms rr
+JOIN reservations r ON r.reservation_id = rr.reservation_id
+WHERE rr.room_id = ? 
+  AND r.status IN ('Pending','Confirmed','Checked-in')
+  AND (r.check_in < @requested_check_out AND r.check_out > @requested_check_in);
+
+
+-- Demo customer —  prob need to replace hash in app at runtime with something real 
 -- INSERT INTO customers (first_name,last_name,email,telephone,password_hash)
 -- VALUES ('Demo','User','demo@moffatbay.com','202-552-1633','<MADE_UP_PASSWORD_HASH>');
