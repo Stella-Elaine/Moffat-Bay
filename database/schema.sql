@@ -1,5 +1,5 @@
 -- =========
--- Database schema (MySQL 8.0.43 compliant) 
+-- Database
 -- =========
 DROP DATABASE IF EXISTS moffat_bay;
 CREATE DATABASE moffat_bay
@@ -17,7 +17,7 @@ GRANT ALL PRIVILEGES ON moffat_bay.* TO 'student'@'%';
 FLUSH PRIVILEGES;
 
 -- =======================
--- Tables 
+-- Tables (Final ERD)
 -- =======================
 
 -- Customers
@@ -56,7 +56,7 @@ CREATE TABLE rooms (
     ON UPDATE RESTRICT ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- Reservations (one reservation may include one or more room assignments from reservation_rooms)
+-- Reservations (one reservation may include one or more room assignments via reservation_rooms)
 DROP TABLE IF EXISTS reservations;
 CREATE TABLE reservations (
   reservation_id  INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,7 +75,7 @@ CREATE TABLE reservations (
   CONSTRAINT ck_res_guests CHECK (num_guests > 0)
 ) ENGINE=InnoDB;
 
--- Junction: reservation - >  rooms (helper of assigning specific rooms)
+-- Junction: reservation ↔ rooms (supports assigning specific rooms)
 DROP TABLE IF EXISTS reservation_rooms;
 CREATE TABLE reservation_rooms (
   reservation_id  INT NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE reservation_rooms (
     ON UPDATE RESTRICT ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- Idexes for lookups & reports
+-- Helpful indexes for lookups & reports
 CREATE INDEX idx_res_customer ON reservations(customer_id);
 CREATE INDEX idx_res_dates ON reservations(check_in, check_out);
 CREATE INDEX idx_room_roomtype ON rooms(room_type_id);
@@ -98,6 +98,8 @@ CREATE INDEX idx_rr_res ON reservation_rooms(reservation_id);
 
 -- =======================
 -- Seed Data
+-- =======================
+
 -- Room types and prices per assignment
 INSERT INTO room_types (type_name, rate, max_guests, description) VALUES
   ('Double Full', 120.00, 2, 'Cozy option for compact stays.'),
@@ -105,36 +107,26 @@ INSERT INTO room_types (type_name, rate, max_guests, description) VALUES
   ('Double Queen',150.00, 4, 'Great for families or friends.'),
   ('King',        160.00, 2, 'Spacious comfort with king bed.');
 
--- physical room capacity 
--- Double Full: DF101-DF105 (5 rooms)
+-- Sample physical rooms (adjust counts as you like)
+-- Double Full: DF101-DF110 (10 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
-  (1,'DF101'),(1,'DF102'),(1,'DF103'),(1,'DF104'),(1,'DF105');
+  (1,'DF101'),(1,'DF102'),(1,'DF103'),(1,'DF104'),(1,'DF105'),
+  (1,'DF106'),(1,'DF107'),(1,'DF108'),(1,'DF109'),(1,'DF110');
 
--- Queen: Q201-Q205 (5 rooms)
+-- Queen: Q201-Q210 (10 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
-  (2,'Q201'),(2,'Q202'),(2,'Q203'),(2,'Q204'),(2,'Q205');
+  (2,'Q201'),(2,'Q202'),(2,'Q203'),(2,'Q204'),(2,'Q205'),
+  (2,'Q206'),(2,'Q207'),(2,'Q208'),(2,'Q209'),(2,'Q210');
 
--- Double Queen: DQ301-DQ308 (5 rooms)
+-- Double Queen: DQ301-DQ308 (8 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
   (3,'DQ301'),(3,'DQ302'),(3,'DQ303'),(3,'DQ304'),
-  (3,'DQ305');
+  (3,'DQ305'),(3,'DQ306'),(3,'DQ307'),(3,'DQ308');
 
--- King: K401-K406 (5 rooms)
+-- King: K401-K406 (6 rooms)
 INSERT INTO rooms (room_type_id, room_number) VALUES
-  (4,'K401'),(4,'K402'),(4,'K403'),(4,'K404'),(4,'K405');
+  (4,'K401'),(4,'K402'),(4,'K403'),(4,'K404'),(4,'K405'),(4,'K406');
 
-
-
---  Kypton's query for confirming conflicts with dates and room_types. 
--- Given a room and a requested date range, it shows conflicts
-SELECT rr.room_id, r.reservation_id, r.check_in, r.check_out, r.status
-FROM reservation_rooms rr
-JOIN reservations r ON r.reservation_id = rr.reservation_id
-WHERE rr.room_id = ? 
-  AND r.status IN ('Pending','Confirmed','Checked-in')
-  AND (r.check_in < @requested_check_out AND r.check_out > @requested_check_in);
-
-
--- Demo customer —  prob need to replace hash in app at runtime with something real 
+-- (Optional) Demo customer — replace hash in app at runtime
 -- INSERT INTO customers (first_name,last_name,email,telephone,password_hash)
--- VALUES ('Demo','User','demo@moffatbay.com','202-552-1633','<MADE_UP_PASSWORD_HASH>');
+-- VALUES ('Demo','User','demo@moffatbay.com','360-555-0148','<BCRYPT_OR_ARGON2_HASH>');
