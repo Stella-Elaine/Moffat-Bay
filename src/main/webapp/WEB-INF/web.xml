@@ -11,5 +11,5 @@
     <res-auth>Container</res-auth>
   </resource-ref>
 
-  <!-- Map servlets here as you add them -->
+  <!--  add servlet mappings here as you createthem -->
 </web-app>

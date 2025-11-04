@@ -6,7 +6,6 @@ Resources to use later:
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions 
 
-
 https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html 
 
 https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html 
@@ -33,3 +32,4 @@ Project Moffat Bay Lodge project. Located on Joviedsa Island in the San Juan Isl
 Sprints 1-4 planning and designing the applications.
 Sprints 5-10 programming/ development sprints. 
 Sprints 11-12 QA testing and delivery.
+
