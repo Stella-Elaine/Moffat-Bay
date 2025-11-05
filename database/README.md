@@ -34,7 +34,7 @@ IF you have the correct version for MySQL then start the service:
 Log into the DB
 4. `brew services start mysql`
 
-useing `brew services restart mysql` will start/restart.
+using `brew services restart mysql` will start/restart.
 
 
 5. type in :
@@ -42,8 +42,8 @@ useing `brew services restart mysql` will start/restart.
 
  You will prompted to enter the password above after this
 EX: 
-stella@SEsMac Moffat-Bay % mysql -u root -p < database/schema.sql
-Enter password: 
+`stella@SEsMac Moffat-Bay % mysql -u root -p < database/schema.sql
+Enter password:`
 
 6. 
 
