@@ -127,6 +127,31 @@ INSERT INTO rooms (room_type_id, room_number) VALUES
 INSERT INTO rooms (room_type_id, room_number) VALUES
   (4,'K401'),(4,'K402'),(4,'K403'),(4,'K404'),(4,'K405'),(4,'K406');
 
--- (Optional) Demo customer — replace hash in app at runtime
--- INSERT INTO customers (first_name,last_name,email,telephone,password_hash)
--- VALUES ('Demo','User','demo@moffatbay.com','360-555-0148','<BCRYPT_OR_ARGON2_HASH>');
+-- Sample customers — Based on User Personas,replace hash in app at runtime
+-- Customers
+INSERT INTO customers (first_name, last_name, email, telephone, password_hash) VALUES
+  ('Leah', 'Travels', 'leah.travels@example.com', '360-555-1111', 'hash1'),
+  ('Sam', 'Parents', 'sam.parents@example.com', '360-555-2222', 'hash2'),
+  ('Ron', 'Returns', 'ron.returns@example.com', '360-555-3333', 'hash3');
+
+-- Sample reservations and room assignments
+-- Reservations
+INSERT INTO reservations (customer_id, num_guests, check_in, check_out, total_cost, status) VALUES
+  (1, 2, '2025-12-01', '2025-12-03', 240.00, 'Confirmed'),
+  (2, 2, '2025-12-05', '2025-12-07', 270.00, 'Pending'),
+  (3, 2, '2025-12-10', '2025-12-12', 320.00, 'Confirmed');
+
+-- Reservation ↔ Rooms
+INSERT INTO reservation_rooms (reservation_id, room_id) VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3);
+
+-- Test Queries:
+-- use moffat_bay;
+-- Show tables;
+-- Select * from customers;
+-- Select * from reservation_rooms;
+-- Select * from reservations;
+-- Select * from room_types;
+-- Select * from rooms;
