@@ -9,4 +9,3 @@
 
 <script src="<c:url value='/scripts/app.js'/>"></script>
 <jsp:include page="/WEB-INF/includes/footer.jsp" />
-

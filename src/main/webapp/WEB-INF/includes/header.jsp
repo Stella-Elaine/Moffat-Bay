@@ -13,7 +13,7 @@
 <header class="site-header">
   <div class="brand">Moffat Bay Lodge</div>
   <nav>
-    <a href="<c:url value='/index.jsp'/>">Home</a>
+    <a href="<c:url value='/pages/index.jsp'/>">Home</a>
     <a href="<c:url value='/pages/about.jsp'/>">About</a>
     <a href="<c:url value='/pages/contact.jsp'/>">Contact</a>
     <a href="<c:url value='/pages/attractions.jsp'/>">Attractions</a>
