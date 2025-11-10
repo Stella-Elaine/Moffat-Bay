@@ -3,6 +3,7 @@
 # mysql -u root -p moffat_bay < database/seeds.sql
 # README — Local MySQL Setup & Schema Load (for Moffat Bay devs/interns)
 
+
 DATABASE: 
 | **Username**      | `student`    |
 | **Password**      | `Student#01` |

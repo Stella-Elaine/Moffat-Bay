@@ -18,7 +18,7 @@
 <header>
   <nav class="navbar">
     <div class="nav-left">
-      <a href="${pageContext.request.contextPath}/index.jsp" class="brand">
+      <a href="${pageContext.request.contextPath}/pages/index.jsp" class="brand">
         <strong>Moffat Bay Lodge</strong>
       </a>
       <span class="tagline">Joviedsa Island • San Juan Islands, Washington</span>
@@ -29,7 +29,7 @@
       <li><a href="${pageContext.request.contextPath}/pages/attractions.jsp">Attractions</a></li>
       <li><a href="${pageContext.request.contextPath}/pages/register.jsp">Register</a></li>
       <li><a href="${pageContext.request.contextPath}/pages/login.jsp">Login</a></li>
-      <li><a href="${pageContext.request.contextPath}/pages/reservation-lookup.jsp">Reservation Lookup</a></li>
+      <li><a href="${pageContext.request.contextPath}/pages/lookup.jsp">Reservation Lookup</a></li>
     </ul>
   </nav>
 </header>

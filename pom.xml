@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.bellevue.csd460</groupId>
@@ -13,24 +12,20 @@
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <!-- Tomcat 10.x uses Jakarta namespace -->
-    <jakarta.servlet.version>5.0.0</jakarta.servlet.version>
-    <mysql.connector.version>8.0.33</mysql.connector.version>
-    <jstl.api.version>3.0.0</jstl.api.version>
-    <jstl.impl.version>3.0.1</jstl.impl.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
-    <!-- Jakarta Servlet API (provided by Tomcat at runtime) -->
+    <!-- Jakarta Servlet API: provided by Tomcat 11 at runtime -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
-      <version>${jakarta.servlet.version}</version>
+      <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
 
-    <!-- JSTL for Jakarta (so ${} and <c:...> work) -->
+    <!-- JSTL for Jakarta (EL + <c:...>) -->
+    <!-- API can be provided, impl bundled -->
     <dependency>
       <groupId>jakarta.servlet.jsp.jstl</groupId>
       <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -47,7 +42,14 @@
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
-      <version>${mysql.connector.version}</version>
+      <version>8.4.0</version>
+    </dependency>
+
+    <!-- BCrypt for password hashing -->
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
     </dependency>
   </dependencies>
 
@@ -59,7 +61,6 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
         <configuration>
-          <!-- We have a web.xml; if you later remove it, set this to true -->
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <warName>moffatbay</warName>
         </configuration>
