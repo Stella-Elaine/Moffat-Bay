@@ -29,7 +29,7 @@
       <li><a href="${pageContext.request.contextPath}/pages/attractions.jsp">Attractions</a></li>
       <li><a href="${pageContext.request.contextPath}/pages/register.jsp">Register</a></li>
       <li><a href="${pageContext.request.contextPath}/pages/login.jsp">Login</a></li>
-      <li><a href="${pageContext.request.contextPath}/pages/reservation-lookup.jsp">Reservation Lookup</a></li>
+      <li><a href="${pageContext.request.contextPath}/pages/lookup.jsp">Reservation Lookup</a></li>
     </ul>
   </nav>
 </header>
