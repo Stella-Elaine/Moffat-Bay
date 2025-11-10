@@ -1,0 +1,13 @@
+<Context>
+  <Resource
+      name="jdbc/MoffatBayDS"
+      auth="Container"
+      type="javax.sql.DataSource"
+      maxTotal="50"
+      maxIdle="10"
+      maxWaitMillis="10000"
+      username="student"
+      password="Student#01"
+      driverClassName="com.mysql.cj.jdbc.Driver"
+      url="jdbc:mysql://localhost:3306/moffat_bay?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
+</Context>

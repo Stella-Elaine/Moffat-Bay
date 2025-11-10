@@ -12,6 +12,8 @@ DATABASE:
 To work inside the DB you need to locally run MyMQL 
 HERe is a step by step command review to ensure, one, you have MYSQL installed on your computer, and two, to start it to run the DB 
 
+Below is what I did and then more traditonal readme if these don't work. 
+
 0. MAKE SURE You CLONE the REPO 
 
 1. CD into the repo MOFFAT_BAY 
@@ -32,9 +34,10 @@ ex:
 
 IF you have the correct version for MySQL then start the service:
 Log into the DB
+
 4. `brew services start mysql`
 
-using `brew services restart mysql` will start/restart.
+useing `brew services restart mysql` will start/restart.
 
 
 5. type in :
@@ -42,8 +45,8 @@ using `brew services restart mysql` will start/restart.
 
  You will prompted to enter the password above after this
 EX: 
-`stella@SEsMac Moffat-Bay % mysql -u root -p < database/schema.sql
-Enter password:`
+stella@SEsMac Moffat-Bay % mysql -u root -p < database/schema.sql
+Enter password: 
 
 6. 
 
@@ -57,7 +60,7 @@ Enter password:`
 
 
  
-
+Traditional: 
 00. OVERVIEW 
 - We use **MySQL 8.0.43** locally.
 - We build with **Maven** and deploy a WAR to Tomcat in later steps.
@@ -66,6 +69,7 @@ Enter password:`
 
 1. — Verify MySQL is running
 
+Depending on what computer you have here are the commands to check 
 ### macOS (Homebrew)
 ```bash
 which mysql
@@ -88,6 +92,7 @@ sudo systemctl status mysql
 sudo systemctl start mysql
 ```
 
+
  2. — Try simple root logins
 ```bash
 mysql -u root
@@ -101,22 +106,26 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-If you cannot log in as root, go to Step 3.
+If you cannot log in as root or your local root is not set up, go to Step 3.
 
  3. — Reset the root password
 
 ### macOS (Homebrew)
-```bash
+In the terminal 
+```bash 
 brew services stop mysql
 /opt/homebrew/opt/mysql/bin/mysqld_safe --skip-grant-tables --skip-networking &
 mysql -u root
 ```
+
+
 ```sql
 FLUSH PRIVILEGES;
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'StrongRootPass123!';
 FLUSH PRIVILEGES;
 EXIT;
 ```
+
 ```bash
 brew services start mysql
 ```
