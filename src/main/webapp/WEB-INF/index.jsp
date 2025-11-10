@@ -1,20 +1,12 @@
-# a minimal landing page to test deploy
-cat > src/main/webapp/index.jsp <<'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Moffat Bay Lodge</title>
-  <link rel="stylesheet" href="styles/main.css"/>
-</head>
-<body>
-  <h1>Moffat Bay Lodge</h1>
-  <p>Deployment smoke test OK.</p>
-  <img src="photos/sample.jpg" alt="sample" style="max-width:200px;">
-  <script src="scripts/app.js"></script>
-</body>
-</html>
-EOF
+<%@ page contentType="text/html; charset=UTF-8" %>
+<jsp:include page="/WEB-INF/includes/header.jsp" />
 
-touch src/main/webapp/styles/main.css
-touch src/main/webapp/scripts/app.js
-touch src/main/webapp/photos/.gitkeep
+<section class="container">
+  <h1 class="section-title">Moffat Bay Lodge</h1>
+  <p>Welcome to Moffat Bay Lodge.</p>
+  <img src="<c:url value='/photos/sample.jpg'/>" alt="sample" style="max-width:200px;">
+</section>
+
+<script src="<c:url value='/scripts/app.js'/>"></script>
+<jsp:include page="/WEB-INF/includes/footer.jsp" />
+
