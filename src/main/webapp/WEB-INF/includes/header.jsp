@@ -18,7 +18,7 @@
 <header>
   <nav class="navbar">
     <div class="nav-left">
-      <a href="${pageContext.request.contextPath}/index.jsp" class="brand">
+      <a href="${pageContext.request.contextPath}/pages/index.jsp" class="brand">
         <strong>Moffat Bay Lodge</strong>
       </a>
       <span class="tagline">Joviedsa Island • San Juan Islands, Washington</span>
