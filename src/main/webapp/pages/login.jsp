@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ include file="/WEB-INF/includes/header.jsp" %>
 <section class="container">
   <h1 class="section-title">Log In</h1>

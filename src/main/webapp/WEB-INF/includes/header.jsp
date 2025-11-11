@@ -1,5 +1,3 @@
-
-<!-- this will be imported into the pages as a header so the functionality and DB work together. -->
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>

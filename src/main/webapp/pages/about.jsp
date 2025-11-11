@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %> 
 
 <jsp:include page="/WEB-INF/includes/header.jsp" />
 
