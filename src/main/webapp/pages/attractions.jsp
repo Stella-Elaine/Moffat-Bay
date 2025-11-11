@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 
- <jsp:include page="/WEB-INF/includes/header.jsp" />
+ <%@ include file="/WEB-INF/includes/header.jsp" %>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/styles.css">
 
 <section class="container">

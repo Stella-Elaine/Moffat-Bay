@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:include page="/WEB-INF/includes/header.jsp" />
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 
 <section class="container">
   <h1 class="section-title">Moffat Bay Lodge</h1>
@@ -8,4 +8,4 @@
 </section>
 
 <script src="<c:url value='/scripts/app.js'/>"></script>
-<jsp:include page="/WEB-INF/includes/footer.jsp" />
+<%@ include file="/WEB-INF/includes/footer.jsp" %>

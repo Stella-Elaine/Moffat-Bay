@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:include page="/WEB-INF/includes/header.jsp" />
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 <section class="container">
   <h1 class="section-title">Look Up a Reservation</h1>
 
@@ -17,4 +17,4 @@
     <button class="btn mt-2" type="submit">Search</button>
   </form>
 </section>
-<jsp:include page="/WEB-INF/includes/footer.jsp" />
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
