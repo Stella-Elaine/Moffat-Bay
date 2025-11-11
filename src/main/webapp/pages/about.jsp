@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %> 
 
-<jsp:include page="/WEB-INF/includes/header.jsp" />
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 
 <section class="hero">
   <div class="inner">
@@ -58,4 +57,4 @@
   </div>
 </section>
 
-<jsp:include page="/WEB-INF/includes/footer.jsp" />
+<%@ include file="/WEB-INF/includes/footer.jsp" %>

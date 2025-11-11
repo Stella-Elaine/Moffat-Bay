@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<jsp:include page="/WEB-INF/includes/header.jsp" />
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 
 <!-- Hero card  -->
 <section class="hero">
@@ -74,4 +73,4 @@
 </section>
 
 <script src="<c:url value='/scripts/app.js'/>"></script>
-<jsp:include page="/WEB-INF/includes/footer.jsp" />
+<%@ include file="/WEB-INF/includes/footer.jsp" %>

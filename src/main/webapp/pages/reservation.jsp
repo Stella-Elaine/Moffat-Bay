@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %> 
 
- <jsp:include page="/WEB-INF/includes/header.jsp" />
+ <%@ include file="/WEB-INF/includes/header.jsp" %>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/styles.css">
 
 
@@ -51,7 +50,7 @@
   <div class="grid grid-3">
     <div class="card">
       <div class="thumb"><img alt="Double full"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Hotel_room_two_beds.jpg/1280px-Hotel_room_two_beds.jpg"></div>
+        src="<c:url value='/photos/attractions-kayaking.jpg' />"></div>
       <h3>Double Full</h3>
       <p>Cozy option for compact stays.</p>
     </div>

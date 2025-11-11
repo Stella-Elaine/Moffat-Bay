@@ -1,15 +1,18 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/WEB-INF/includes/header.jsp" %>
 <section class="container">
   <h1 class="section-title">Log In</h1>
-  <form class="card" action="#" method="post" onsubmit="return false;">
-    <label for="user">Email</label>
-    <input id="user" type="email" required />
-    <label for="pass" class="mt-2">Password</label>
-    <input id="pass" type="password" required />
-    <button class="btn mt-2" type="submit">Login</button>
+
+  <c:if test="${not empty error}">
+    <div class="alert error">${error}</div>
+  </c:if>
+
+  <form class="card" action="<c:url value='/login'/>" method="post">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required />
+    <label for="pw">Password</label>
+    <input id="pw" name="password" type="password" required />
+    <button class="btn mt-2" type="submit">Log In</button>
   </form>
 </section>
-
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
