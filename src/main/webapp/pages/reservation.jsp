@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/includes/header.jsp" %>
 
-<!-- Optional: flash success from LoginServlet / RegisterServlet -->
+<!-- flash message of  success from LoginServlet / RegisterServlet -->
 <c:if test="${not empty sessionScope.flash_success}">
   <section class="container mt-2">
     <div class="alert success">
@@ -89,14 +89,14 @@
 </section>
 
 <script>
-  // Optional: fade out success flash after a few seconds
+  // fade out success flash after a few seconds
   window.addEventListener("DOMContentLoaded", () => {
     const flash = document.querySelector(".alert.success");
     if (flash) {
       setTimeout(() => {
         flash.style.transition = "opacity 0.8s ease";
         flash.style.opacity = "0";
-      }, 4000); // 4 seconds
+      }, 4000); // this is  4 seconds
     }
   });
 </script>

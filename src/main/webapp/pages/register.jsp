@@ -4,14 +4,12 @@
 <section class="container">
   <h1 class="section-title">Create Your Account</h1>
 
-  <!-- Error message from RegisterServlet -->
   <c:if test="${not empty error}">
     <div class="alert error">
       ${error}
     </div>
   </c:if>
 
-  <!-- Success message from RegisterServlet -->
   <c:if test="${not empty success}">
     <div class="alert success">
       ${success}
@@ -87,7 +85,6 @@
 </section>
 
 <script>
-  // Optional: fade out success messages after 5 seconds
   window.addEventListener("DOMContentLoaded", () => {
     const flash = document.querySelector(".alert.success");
     if (flash) {

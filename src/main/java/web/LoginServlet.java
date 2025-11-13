@@ -25,21 +25,20 @@ public class LoginServlet extends HttpServlet {
     String pw    = req.getParameter("password");
 
     try {
-      // Basic required field check
       if (email == null || pw == null || email.isBlank() || pw.isBlank()) {
         req.setAttribute("error", "Email and password are required.");
         req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
         return;
       }
 
-      // Case 1: email not found at all
+      // Test Case 1: email not found at all
       if (!customers.emailExists(email)) {
         req.setAttribute("error", "No account found with that email.");
         req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
         return;
       }
 
-      // Case 2: email exists, but password is wrong
+      // Test Case 2: email exists, but password is wrong
       Integer id = customers.authenticate(email, pw);
       if (id == null) {
         req.setAttribute("error", "Incorrect password. Please try again.");
@@ -47,14 +46,12 @@ public class LoginServlet extends HttpServlet {
         return;
       }
 
-      // Case 3: success — set session + flash + redirect to reservation
+      //  Tests Case 3: success — set session + flash + redirect to reservation
       HttpSession session = req.getSession(true);
       session.setAttribute("customerId", id);
 
-      // one-time flash success message
       session.setAttribute("flash_success", "Login successful. Welcome back!");
 
-      // redirect to reservation page
       resp.sendRedirect(req.getContextPath() + "/pages/reservation.jsp");
 
     } catch (Exception e) {
