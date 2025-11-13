@@ -1,8 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 
- <%@ include file="/WEB-INF/includes/header.jsp" %>
- <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/styles.css">
-
+<!-- flash message of  success from LoginServlet / RegisterServlet -->
+<c:if test="${not empty sessionScope.flash_success}">
+  <section class="container mt-2">
+    <div class="alert success">
+      ${sessionScope.flash_success}
+    </div>
+  </section>
+  <c:remove var="flash_success" scope="session" />
+</c:if>
 
 <section class="hero">
   <div class="inner">
@@ -25,7 +32,10 @@
       <div>
         <label for="guests">Guests</label>
         <select id="guests">
-          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
         </select>
       </div>
     </div>
@@ -40,7 +50,8 @@
           <option>King – $160/night</option>
         </select>
       </div>
-      <div></div><div></div>
+      <div></div>
+      <div></div>
     </div>
 
     <a class="btn mt-2" href="reservation-summary.jsp">Search Availability</a>
@@ -49,26 +60,45 @@
   <h2 class="section-title">Room Options (Preview)</h2>
   <div class="grid grid-3">
     <div class="card">
-      <div class="thumb"><img alt="Double full"
-        src="<c:url value='/photos/attractions-kayaking.jpg' />"></div>
+      <div class="thumb">
+        <img alt="Double full"
+             src="<c:url value='/photos/attractions-kayaking.jpg' />">
+      </div>
       <h3>Double Full</h3>
       <p>Cozy option for compact stays.</p>
     </div>
 
     <div class="card">
-      <div class="thumb"><img alt="Queen"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Hotel_room_queen_bed.jpg/1280px-Hotel_room_queen_bed.jpg"></div>
+      <div class="thumb">
+        <img alt="Queen"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Hotel_room_queen_bed.jpg/1280px-Hotel_room_queen_bed.jpg">
+      </div>
       <h3>Queen</h3>
       <p>Balanced space and comfort.</p>
     </div>
 
     <div class="card">
-      <div class="thumb"><img alt="Double queen"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Hotel_room_double_queen.jpg/1280px-Hotel_room_double_queen.jpg"></div>
+      <div class="thumb">
+        <img alt="Double queen"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Hotel_room_double_queen.jpg/1280px-Hotel_room_double_queen.jpg">
+      </div>
       <h3>Double Queen</h3>
       <p>Great for families or friends.</p>
     </div>
   </div>
 </section>
+
+<script>
+  // fade out success flash after a few seconds
+  window.addEventListener("DOMContentLoaded", () => {
+    const flash = document.querySelector(".alert.success");
+    if (flash) {
+      setTimeout(() => {
+        flash.style.transition = "opacity 0.8s ease";
+        flash.style.opacity = "0";
+      }, 4000); // this is  4 seconds
+    }
+  });
+</script>
 
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
