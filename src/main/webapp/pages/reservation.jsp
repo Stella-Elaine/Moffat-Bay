@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
  <%@ include file="/WEB-INF/includes/header.jsp" %>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/styles.css">
@@ -12,20 +13,27 @@
 </section>
 
 <section class="container mt-3">
-  <form class="card" onsubmit="return false;">
+  <c:if test="${not empty error}">
+    <div class="alert error">${error}</div>
+  </c:if>
+  <!-- Step 1: Search availability -->
+  <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
     <div class="grid grid-3">
       <div>
         <label for="in">Check In Date</label>
-        <input id="in" type="date" required />
+        <input id="in" name="check_in" type="date" value="${check_in != null ? check_in : param.check_in}" required />
       </div>
       <div>
         <label for="out">Check Out Date</label>
-        <input id="out" type="date" required />
+        <input id="out" name="check_out" type="date" value="${check_out != null ? check_out : param.check_out}" required />
       </div>
       <div>
         <label for="guests">Guests</label>
-        <select id="guests">
-          <option>1</option><option>2</option><option>3</option><option>4</option>
+        <select id="guests" name="guests">
+          <option value="1" ${ (guests == 1 || param.guests == '1') ? 'selected' : ''}>1</option>
+          <option value="2" ${ (guests == 2 || param.guests == '2') ? 'selected' : ''}>2</option>
+          <option value="3" ${ (guests == 3 || param.guests == '3') ? 'selected' : ''}>3</option>
+          <option value="4" ${ (guests == 4 || param.guests == '4') ? 'selected' : ''}>4</option>
         </select>
       </div>
     </div>
@@ -33,42 +41,63 @@
     <div class="grid grid-3 mt-2">
       <div>
         <label for="room">Room Selection</label>
-        <select id="room">
-          <option>Double Full Beds – $120/night</option>
-          <option>Queen – $135/night</option>
-          <option>Double Queen Beds – $150/night</option>
-          <option>King – $160/night</option>
+        <select id="room" name="room_type_id">
+          <option value="1" ${ (preferred_room_type_id == 1 || param.room_type_id == '1') ? 'selected' : ''}>Double Full</option>
+          <option value="2" ${ (preferred_room_type_id == 2 || param.room_type_id == '2') ? 'selected' : ''}>Queen</option>
+          <option value="3" ${ (preferred_room_type_id == 3 || param.room_type_id == '3') ? 'selected' : ''}>Double Queen</option>
+          <option value="4" ${ (preferred_room_type_id == 4 || param.room_type_id == '4') ? 'selected' : ''}>King</option>
         </select>
       </div>
       <div></div><div></div>
     </div>
-
-    <a class="btn mt-2" href="reservation-summary.jsp">Search Availability</a>
+    <input type="hidden" name="action" value="search"/>
+    <div class="mt-2"><button type="submit" class="btn">Search Availability</button></div>
   </form>
 
-  <h2 class="section-title">Room Options (Preview)</h2>
-  <div class="grid grid-3">
-    <div class="card">
-      <div class="thumb"><img alt="Double full"
-        src="<c:url value='/photos/attractions-kayaking.jpg' />"></div>
-      <h3>Double Full</h3>
-      <p>Cozy option for compact stays.</p>
-    </div>
-
-    <div class="card">
-      <div class="thumb"><img alt="Queen"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Hotel_room_queen_bed.jpg/1280px-Hotel_room_queen_bed.jpg"></div>
-      <h3>Queen</h3>
-      <p>Balanced space and comfort.</p>
-    </div>
-
-    <div class="card">
-      <div class="thumb"><img alt="Double queen"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Hotel_room_double_queen.jpg/1280px-Hotel_room_double_queen.jpg"></div>
-      <h3>Double Queen</h3>
-      <p>Great for families or friends.</p>
-    </div>
-  </div>
+  <!-- Step 2: Show available options and prompt to select -->
+  <c:if test="${not empty availableRooms}">
+    <h2 class="section-title">Available Rooms</h2>
+    <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
+      <input type="hidden" name="action" value="reserve"/>
+      <!-- keep the search context -->
+      <input type="hidden" name="check_in" value="${check_in}"/>
+      <input type="hidden" name="check_out" value="${check_out}"/>
+      <input type="hidden" name="guests" value="${guests}"/>
+      <input type="hidden" name="room_type_id" value="${preferred_room_type_id}"/>
+      <!-- Scrollable list so the reserve button stays visible below -->
+      <div class="room-list-scroll" style="max-height: 22rem; overflow-y: auto; padding: 0.5rem; border: 1px solid #ddd; border-radius: 6px;">
+        <fieldset class="stack" style="border: none; margin: 0; padding: 0;">
+          <legend>Select a room</legend>
+          <c:forEach var="opt" items="${availableRooms}">
+            <label class="card" style="display:grid; grid-template-columns:180px 1fr; gap:1rem; align-items:center; margin-bottom:0.5rem;">
+              <div class="thumb">
+                <!-- Determine prefix DF/DQ/Q/K from room number -->
+                <c:set var="prefix" value="DF"/>
+                <c:if test="${fn:startsWith(opt.roomNumber,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
+                <c:if test="${fn:startsWith(opt.roomNumber,'DF')}"><c:set var="prefix" value="DF"/></c:if>
+                <c:if test="${fn:startsWith(opt.roomNumber,'Q')}"><c:set var="prefix" value="Q"/></c:if>
+                <c:if test="${fn:startsWith(opt.roomNumber,'K')}"><c:set var="prefix" value="K"/></c:if>
+                <c:set var="fileName" value="room-option-${prefix}.jpg"/>
+                <img alt="${opt.roomTypeName}" src="<c:url value='/photos/rooms/${fileName}'/>"/>
+              </div>
+              <div>
+                <div class="stack" style="gap:0.25rem; align-items:flex-start;">
+                  <div>
+                    <input type="radio" name="room_choice" value="${opt.roomId}:${opt.roomTypeId}" required />
+                    <strong>Room ${opt.roomNumber}</strong>
+                  </div>
+                  <div>${opt.roomTypeName} • Max ${opt.maxGuests} guests • $${opt.nightlyRate}/night</div>
+                </div>
+              </div>
+            </label>
+          </c:forEach>
+        </fieldset>
+      </div>
+      <div class="mt-2">
+        <button type="submit" class="btn">Reserve Selected Room</button>
+      </div>
+    </form>
+  </c:if>
 </section>
 
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
