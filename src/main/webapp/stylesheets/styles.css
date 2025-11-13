@@ -1,8 +1,3 @@
-/* Moffat Bay Lodge - shared stylesheet
-   Palette: espresso #5a3b2a, sand #d8c7b8, cream #faf5ef, driftwood #8a6e5a, accent #b6926f
-   Headings: Playfair Display, Body: Open Sans
-*/
-
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@400;600;700&display=swap');
 
 :root{
@@ -91,13 +86,22 @@ nav a:hover{color:var(--espresso)}
 }
 .hero p{max-width:60ch; margin-inline:auto; color:#fffde9}
 
-/* Cards and content */
 .card{
   background:#fff; border:1px solid #eae2db; border-radius:.75rem;
   padding:1.1rem; box-shadow:0 .5rem 2rem #0000000b;
 }
 .card h3{margin:.2rem 0 .4rem; font-family:'Playfair Display',serif}
 .card p{margin:.3rem 0}
+
+.flash-fade {
+  animation: fadeOut 6s forwards;
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 /* Image blocks */
 .thumb{
@@ -118,7 +122,6 @@ nav a:hover{color:var(--espresso)}
   color:var(--espresso); margin:2.2rem 0 1rem;
 }
 
-/* Forms */
 label{font-weight:600; display:block; margin:.45rem 0 .25rem}
 input, select, textarea{
   width:100%; padding:.75rem .85rem; border:1px solid #d9cec5; border-radius:.6rem;
@@ -140,6 +143,5 @@ textarea{min-height:160px; resize:vertical}
 .summary dt{font-weight:700}
 .summary dd{margin:0}
 
-/* Small helper spacing */
 .mt-2{margin-top:1.25rem}
 .mt-3{margin-top:2rem}

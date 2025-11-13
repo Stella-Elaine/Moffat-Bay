@@ -1,9 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
- <%@ include file="/WEB-INF/includes/header.jsp" %>
- <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/styles.css">
-
+<!-- flash message of  success from LoginServlet / RegisterServlet -->
+<c:if test="${not empty sessionScope.flash_success}">
+  <section class="container mt-2">
+    <div class="alert success">
+      ${sessionScope.flash_success}
+    </div>
+  </section>
+  <c:remove var="flash_success" scope="session" />
+</c:if>
 
 <section class="hero">
   <div class="inner">
@@ -48,7 +54,8 @@
           <option value="4" ${ (preferred_room_type_id == 4 || param.room_type_id == '4') ? 'selected' : ''}>King</option>
         </select>
       </div>
-      <div></div><div></div>
+      <div></div>
+      <div></div>
     </div>
     <input type="hidden" name="action" value="search"/>
     <div class="mt-2"><button type="submit" class="btn">Search Availability</button></div>
@@ -99,5 +106,18 @@
     </form>
   </c:if>
 </section>
+
+<script>
+  // fade out success flash after a few seconds
+  window.addEventListener("DOMContentLoaded", () => {
+    const flash = document.querySelector(".alert.success");
+    if (flash) {
+      setTimeout(() => {
+        flash.style.transition = "opacity 0.8s ease";
+        flash.style.opacity = "0";
+      }, 4000); // this is  4 seconds
+    }
+  });
+</script>
 
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
