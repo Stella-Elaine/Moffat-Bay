@@ -179,9 +179,9 @@ public class ReservationDao {
       "c.first_name, c.last_name, c.email, rt.type_name, r.room_number " +
       "FROM reservations res " +
       "JOIN customers c ON res.customer_id = c.customer_id " +
-      "JOIN reservation_rooms rr ON rr.reservation_id = res.reservation_id " +
-      "JOIN rooms r ON rr.room_id = r.room_id " +
-      "JOIN room_types rt ON r.room_type_id = rt.room_type_id " +
+      "LEFT JOIN reservation_rooms rr ON rr.reservation_id = res.reservation_id " +
+      "LEFT JOIN rooms r ON rr.room_id = r.room_id " +
+      "LEFT JOIN room_types rt ON r.room_type_id = rt.room_type_id " +
       "WHERE res.reservation_id = ?";
     try (Connection c = Db.get(); PreparedStatement ps = c.prepareStatement(sql)) {
       ps.setInt(1, reservationId);
@@ -201,9 +201,17 @@ public class ReservationDao {
             email = rs.getString("email");
             typeName = rs.getString("type_name");
           }
-          roomNumbers.add(rs.getString("room_number"));
+          String roomNum = rs.getString("room_number");
+          if (roomNum != null) {
+            roomNumbers.add(roomNum);
+          }
         }
         if (resId == -1) return null; // not found
+        // If cancelled and no rooms, use generic message
+        if (roomNumbers.isEmpty()) {
+          roomNumbers.add("N/A");
+          if (typeName == null) typeName = "N/A";
+        }
         return new ReservationSummary(resId, first, last, email, checkIn, checkOut, numGuests, totalCost, status, roomNumbers, typeName);
       }
     }
