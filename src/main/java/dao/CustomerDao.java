@@ -50,4 +50,14 @@ public class CustomerDao {
       }
     }
   }
+
+  public String getEmail(int customerId) throws SQLException {
+    final String sql = "SELECT email FROM customers WHERE customer_id = ?";
+    try (Connection c = Db.get(); PreparedStatement ps = c.prepareStatement(sql)) {
+      ps.setInt(1, customerId);
+      try (ResultSet rs = ps.executeQuery()) {
+        return rs.next() ? rs.getString(1) : null;
+      }
+    }
+  }
 }
