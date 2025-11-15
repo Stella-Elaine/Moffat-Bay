@@ -58,5 +58,55 @@
   </c:if>
 </section>
 
+<style>
+  #cancelModal { display:none; position:fixed; inset:0; z-index:1000; }
+  #cancelBackdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); }
+  #cancelContent {
+    position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+    background:#fff; padding:20px; border-radius:8px; max-width:90%; width:360px;
+    box-shadow:0 8px 24px rgba(0,0,0,.2);
+  }
+  #cancelContent h2 { margin:0 0 8px; font-size:1.1rem; }
+  #cancelContent p { margin:0 0 16px; }
+  #closeCancel { padding:8px 14px; }
+</style>
+
+<div id="cancelModal" aria-hidden="true">
+  <div id="cancelBackdrop"></div>
+  <div id="cancelContent" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
+    <h2 id="cancelTitle">Reservation cancelled</h2>
+    <p id="cancelMessage">Your reservation has been cancelled.</p>
+    <div style="text-align:right;">
+      <button id="closeCancel" type="button">OK</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('status') === 'cancelled') {
+    const id = params.get('id');
+    const modal = document.getElementById('cancelModal');
+    const message = document.getElementById('cancelMessage');
+    if (id) message.textContent = 'Your reservation #' + id + ' has been cancelled.';
+    modal.style.display = 'block';
+    modal.setAttribute('aria-hidden', 'false');
+
+    const close = function() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      params.delete('status');
+      const newQuery = params.toString();
+      history.replaceState(null, '', location.pathname + (newQuery ? '?' + newQuery : ''));
+    };
+
+    document.getElementById('closeCancel').addEventListener('click', close);
+    document.getElementById('cancelBackdrop').addEventListener('click', close);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  }
+})();
+</script>
+
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
 

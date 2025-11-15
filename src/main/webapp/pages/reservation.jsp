@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
 <!-- flash message of  success from LoginServlet / RegisterServlet -->

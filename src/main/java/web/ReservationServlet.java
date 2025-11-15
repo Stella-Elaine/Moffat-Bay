@@ -1,8 +1,6 @@
 package web;
 
 import dao.ReservationDao;
-import dao.CustomerDao;
-import service.EmailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -16,8 +14,6 @@ import java.time.temporal.ChronoUnit;
 @WebServlet(name = "ReservationServlet", urlPatterns = {"/reserve"})
 public class ReservationServlet extends HttpServlet {
   private final ReservationDao reservations = new ReservationDao();
-  private final CustomerDao customers = new CustomerDao();
-  private final EmailService emailService = new EmailService();
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -111,23 +107,6 @@ public class ReservationServlet extends HttpServlet {
         if (reservationId < 0) throw new ServletException("Failed to create reservation");
         reservations.assignRoomToReservation(reservationId, roomId);
         session.setAttribute("reservationId", reservationId);
-        // Send confirmation email (best-effort)
-        try {
-          String to = (String) session.getAttribute("customerEmail");
-          if (to == null) to = customers.getEmail(customerId);
-          String subject = "Your Moffat Bay reservation #" + reservationId;
-          String body = "Thank you for your reservation!\n" +
-                  "Reservation ID: " + reservationId + "\n" +
-                  "Check-in: " + checkIn + "\n" +
-                  "Check-out: " + checkOut + "\n" +
-                  "Guests: " + numGuests + "\n" +
-                  "Total: $" + total + "\n" +
-                  "We look forward to your stay.";
-          emailService.send(to, subject, body);
-        } catch (Exception mailEx) {
-          // don't fail reservation on email errors
-          getServletContext().log("Email confirmation failed: " + mailEx.getMessage());
-        }
         resp.sendRedirect(req.getContextPath() + "/reservation-summary?id=" + reservationId);
         return;
       }
