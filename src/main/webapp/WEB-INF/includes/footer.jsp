@@ -1,21 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 </main>
 <footer class="site-footer">
-  <section class="footer-grid">
-    <div>
-      <h4>Reservations Office</h4>
-      <p>123 Marina Way, Joviedsa Island, WA</p>
-      <p>(360) 555-0148</p>
-      <p><a href="mailto:hello@moffatbay.com">hello@moffatbay.com</a></p>
-    </div>
-    <div>
-      <h4>Hours</h4>
-      <p>Mon–Fri: 9am–6pm • Sat–Sun: 10am–4pm</p>
-    </div>
-    <div>
-      <h4>Get Social</h4>
-      <p><a href="#">Instagram</a> • <a href="#">Facebook</a></p>
-    </div>
-  </section>
+  <div class="footer-content">
+    <p class="footer-contact">
+      <a href="tel:+13605550148">+1 (360) 555-0148</a> • 
+      <a href="mailto:hello@moffatbay.com">hello@moffatbay.com</a> • 
+      <a href="<c:url value='/pages/about.jsp#contact' />">Full Contact Info</a>
+    </p>
+    <p class="footer-social">
+      <a class="social-link" href="#" aria-label="Instagram">
+        <img class="icon-sm" src="<c:url value='/photos/instagram-logo.png' />" alt="Instagram" />
+      </a>
+      <a class="social-link" href="#" aria-label="Facebook">
+        <img class="icon-sm" src="<c:url value='/photos/facebook-logo.png' />" alt="Facebook" />
+      </a>
+    </p>
+  </div>
   <div class="copyright">
     <p>© <%= java.time.Year.now() %> Moffat Bay Lodge</p>
   </div>
