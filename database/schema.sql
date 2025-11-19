@@ -102,10 +102,13 @@ CREATE INDEX idx_rr_res ON reservation_rooms(reservation_id);
 
 -- Room types and prices per assignment
 INSERT INTO room_types (type_name, rate, max_guests, description) VALUES
-  ('Double Full', 120.00, 2, 'Cozy option for compact stays.'),
-  ('Queen',       135.00, 2, 'Balanced space and comfort.'),
-  ('Double Queen',150.00, 4, 'Great for families or friends.'),
-  ('King',        160.00, 2, 'Spacious comfort with king bed.');
+  ('Double Full', 126.00, 2, 'Cozy option for compact stays.'),         -- 120.00 * 1.05
+  ('Queen',       141.75, 2, 'Balanced space and comfort.'),            -- 135.00 * 1.05
+  ('Double Queen',157.50, 4, 'Great for families or friends.'),         -- 150.00 * 1.05
+  ('King',        168.00, 2, 'Spacious comfort with king bed.');        -- 160.00 * 1.05
+
+-- Migration note: To apply the 5% increase to existing databases without reseeding:
+-- UPDATE room_types SET rate = ROUND(rate * 1.05, 2);
 
 -- Sample physical rooms (adjust counts as you like)
 -- Double Full: DF101-DF110 (10 rooms)
@@ -137,9 +140,9 @@ INSERT INTO customers (first_name, last_name, email, telephone, password_hash) V
 -- Sample reservations and room assignments
 -- Reservations
 INSERT INTO reservations (customer_id, num_guests, check_in, check_out, total_cost, status) VALUES
-  (1, 2, '2025-12-01', '2025-12-03', 240.00, 'Confirmed'),
-  (2, 2, '2025-12-05', '2025-12-07', 270.00, 'Pending'),
-  (3, 2, '2025-12-10', '2025-12-12', 320.00, 'Confirmed');
+  (1, 2, '2025-12-01', '2025-12-03', 252.00, 'Confirmed'),  -- 2 nights * 126.00 (updated Double Full)
+  (2, 2, '2025-12-05', '2025-12-07', 283.50, 'Pending'),   -- 2 nights * 141.75 (updated Queen)
+  (3, 2, '2025-12-10', '2025-12-12', 336.00, 'Confirmed');  -- 2 nights * 168.00 (updated King)
 
 -- Reservation ↔ Rooms
 INSERT INTO reservation_rooms (reservation_id, room_id) VALUES
