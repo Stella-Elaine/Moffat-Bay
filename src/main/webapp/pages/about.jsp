@@ -57,4 +57,32 @@
   </div>
 </section>
 
+<section class="container mt-3" id="contact">
+  <h1>Contact Us</h1>
+  <div class="grid grid-3">
+    <div class="card">
+      <h2>Reservations Office</h2>
+      <p>123 Marina Way, Joviedsa Island WA<br>+1 (360) 555-0148<br>hello@moffatbay.com</p>
+    </div>
+    <div class="card">
+      <h2>Office Hours</h2>
+      <p>Mon–Fri 9:00–18:00 • Sat 9:00–12:00</p>
+    </div>
+    <div class="card">
+      <h2>Social</h2>
+      <p>
+        <a class="social-link" href="#" aria-label="Instagram">
+          <img class="icon-sm" src="<c:url value='/photos/instagram-logo.png' />" alt="Instagram logo" />
+          <span>Instagram</span>
+        </a>
+        •
+        <a class="social-link" href="#" aria-label="Facebook">
+          <img class="icon-sm" src="<c:url value='/photos/facebook-logo.png' />" alt="Facebook logo" />
+          <span>Facebook</span>
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
