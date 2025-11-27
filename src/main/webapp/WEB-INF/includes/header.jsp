@@ -13,7 +13,6 @@
   <nav>
     <a href="<c:url value='/pages/index.jsp'/>">Home</a>
     <a href="<c:url value='/pages/about.jsp'/>">About</a>
-    <a href="<c:url value='/pages/contact.jsp'/>">Contact</a>
     <a href="<c:url value='/pages/attractions.jsp'/>">Attractions</a>
     <a href="<c:url value='/pages/register.jsp'/>">Register</a>
     <a href="<c:url value='/pages/login.jsp'/>">Login</a>
