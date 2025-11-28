@@ -1,38 +1,60 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-<section class="container">
+
+<section class="container lookup-page">
   <h1 class="section-title">Look Up a Reservation</h1>
+  <p class="helper-text">
+    Search using the email you registered with. You can add a Reservation ID if you know it.
+  </p>
 
   <c:if test="${not empty error}">
     <div class="alert error">${error}</div>
   </c:if>
 
-  <form class="card" action="<c:url value='/lookup'/>" method="get">
+  <!-- Search form -->
+  <form class="card lookup-form" action="<c:url value='/lookup'/>" method="get">
     <div class="grid grid-2">
-      <div>
+      <div class="field">
         <label for="resid">Reservation ID</label>
-        <input id="resid" name="reservation_id" type="number" min="1" />
+        <input
+          id="resid"
+          name="reservation_id"
+          type="number"
+          min="1"
+        />
+        <p class="field-hint">
+          Optional — leave blank to see all reservations for this email.
+        </p>
       </div>
-      <div>
+
+      <div class="field">
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" value="${email}" />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value="${email}"
+        />
       </div>
     </div>
+
     <button class="btn mt-2" type="submit">Search</button>
   </form>
 
+  <!-- Results table -->
   <c:if test="${not empty results}">
-    <h2 class="section-title">Reservations for ${email}</h2>
-    <div class="card" style="overflow-x:auto;">
-      <table class="table" style="width:100%; border-collapse:collapse;">
+    <h2 class="section-title section-title-sm">Reservations for ${email}</h2>
+
+    <div class="card table-wrapper">
+      <table class="table">
         <thead>
           <tr>
-            <th style="text-align:left;">ID</th>
-            <th style="text-align:left;">Check-In</th>
-            <th style="text-align:left;">Check-Out</th>
-            <th style="text-align:left;">Status</th>
-            <th style="text-align:left;">Total</th>
-            <th></th>
+            <th>ID</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th class="actions-col"></th>
           </tr>
         </thead>
         <tbody>
@@ -43,7 +65,12 @@
               <td>${r.checkOut}</td>
               <td>${r.status}</td>
               <td>$${r.totalCost}</td>
-              <td><a class="btn" href="<c:url value='/reservation-summary?id=${r.reservationId}'/>">View</a></td>
+              <td class="actions-col">
+                <a class="btn btn-small"
+                   href="<c:url value='/reservation-summary?id=${r.reservationId}'/>">
+                  View
+                </a>
+              </td>
             </tr>
           </c:forEach>
         </tbody>
@@ -51,4 +78,5 @@
     </div>
   </c:if>
 </section>
+
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
