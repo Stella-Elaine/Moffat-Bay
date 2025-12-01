@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 </main>
+
 <footer class="site-footer">
   <div class="footer-content">
     <p class="footer-contact">
@@ -20,6 +21,7 @@
     <p>© <%= java.time.Year.now() %> Moffat Bay Lodge</p>
   </div>
 </footer>
+
 <script src="<c:url value='/scripts/app.js'/>"></script>
 </body>
 </html>
