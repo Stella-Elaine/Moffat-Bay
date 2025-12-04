@@ -499,3 +499,16 @@ textarea:focus {
     font-size: 1.4rem;
   }
 }
+
+/* ---------------------------------------------------
+   Animations for attraction cards
+--------------------------------------------------- */
+
+.attraction-card {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.attraction-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
