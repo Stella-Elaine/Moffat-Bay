@@ -5,67 +5,37 @@
   <h1 class="section-title">Create Your Account</h1>
 
   <c:if test="${not empty error}">
-    <div class="alert error">
-      ${error}
-    </div>
+    <div class="alert error">${error}</div>
   </c:if>
 
   <c:if test="${not empty success}">
-    <div class="alert success">
-      ${success}
-    </div>
+    <div class="alert success">${success}</div>
   </c:if>
 
-  <!-- Registration form -->
-  <form class="card" action="<c:url value='/register'/>" method="post" novalidate>
+  <form class="card" action="<c:url value='/register'/>" method="post">
+
     <div class="grid grid-2">
       <div>
         <label for="first">First Name</label>
-        <input
-          id="first"
-          name="first_name"
-          type="text"
-          autocomplete="given-name"
-          required
-        />
+        <input id="first" name="first_name" type="text" autocomplete="given-name" required />
       </div>
       <div>
         <label for="last">Last Name</label>
-        <input
-          id="last"
-          name="last_name"
-          type="text"
-          autocomplete="family-name"
-          required
-        />
+        <input id="last" name="last_name" type="text" autocomplete="family-name" required />
       </div>
     </div>
 
     <div class="grid grid-2 mt-2">
       <div>
-        <label for="email">Email (used as username)</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="you@example.com"
-          autocomplete="email"
-          required
-        />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
       </div>
       <div>
         <label for="phone">Telephone</label>
-        <input
-          id="phone"
-          name="telephone"
-          type="tel"
-          placeholder="(360) 555-0148"
-          autocomplete="tel"
-        />
+        <input id="phone" name="telephone" type="tel" />
       </div>
     </div>
 
-    <!-- Password requirements: ≥8 chars, 1 number, 1 upper, 1 lower -->
     <div class="mt-2">
       <label for="pw">Password</label>
       <input
@@ -75,7 +45,6 @@
         pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}"
         minlength="8"
         title="Min 8 characters, including 1 number, 1 uppercase and 1 lowercase letter"
-        autocomplete="new-password"
         required
       />
     </div>
@@ -88,10 +57,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     const flash = document.querySelector(".alert.success");
     if (flash) {
-      setTimeout(() => {
-        flash.style.transition = "opacity 0.8s ease";
-        flash.style.opacity = "0";
-      }, 5000);
+      setTimeout(() => (flash.style.opacity = "0"), 5000);
     }
   });
 </script>
