@@ -5,12 +5,20 @@
 <!-- Hero card  -->
 <section class="hero">
   <div class="inner">
+
+    <!-- Client Tribal Symbol -->
+    <img
+      src="<c:url value='/photos/tribal-fish.gif'/>"
+      alt="Moffat Bay Tribal Symbol"
+      class="hero-symbol"
+    />
+
     <h1>Welcome to Your Island Stay</h1>
     <p>Coastal calm, cedar-scented air, and easy access to kayak coves and whale-watching.</p>
 
     <div class="stack" style="justify-items:center; margin-top:.9rem">
-      <a class="btn btn-outline" href="<c:url value='/pages/reservation.jsp'/>">Reserve a Room</a>
-      <a class="btn btn-outline" href="<c:url value='/pages/attractions.jsp'/>">See Attractions</a>
+      <a class="btn btn-outline" href="<c:url value='/pages/reservation.jsp'/>">Book Your Stay</a>
+      <a class="btn btn-outline" href="<c:url value='/pages/attractions.jsp'/>">Explore Moffat Bay</a>
     </div>
   </div>
 </section>
@@ -41,7 +49,7 @@
   </div>
 </section>
 
-<!-- Photo grid here -->
+<!-- Photo grid -->
 <section class="container mt-3">
   <h2 class="section-title">A Glimpse Around the Lodge</h2>
 

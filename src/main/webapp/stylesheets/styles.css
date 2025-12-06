@@ -318,7 +318,7 @@ textarea:focus {
   box-shadow: 0 0 0 2px rgba(178, 107, 69, 0.2);
 }
 
-/* Alerts (flash messages) */
+/* Alerts */
 
 .alert {
   padding: 0.75rem 1rem;
@@ -340,7 +340,7 @@ textarea:focus {
 }
 
 /* ---------------------------------------------------
-   Tables (Lookup / Summary)
+   Tables
 --------------------------------------------------- */
 
 .table {
@@ -405,8 +405,6 @@ textarea:focus {
   gap: 0.5rem;
 }
 
-/* Social icons */
-
 .icon-sm {
   width: 26px;
   height: 26px;
@@ -416,15 +414,12 @@ textarea:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* Extra spacing between icons */
 .footer-social .social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-right: 0.15rem;
 }
-
-/* Copyright line */
 
 .copyright {
   max-width: 1040px;
@@ -462,7 +457,7 @@ textarea:focus {
 }
 
 /* ---------------------------------------------------
-   About / Contact section
+   About / Contact
 --------------------------------------------------- */
 
 #contact h1 {
@@ -501,7 +496,7 @@ textarea:focus {
 }
 
 /* ---------------------------------------------------
-   Animations for attraction cards
+   Animations
 --------------------------------------------------- */
 
 .attraction-card {
@@ -511,4 +506,30 @@ textarea:focus {
 .attraction-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------------------------------------------------
+   Client Tribal Fish Graphic
+--------------------------------------------------- */
+
+.hero-symbol {
+  width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.4rem;
+  opacity: 0;
+  animation: heroFade 1.4s ease forwards;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.85))
+          drop-shadow(0 4px 14px rgba(0,0,0,0.25));
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
