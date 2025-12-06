@@ -2,13 +2,12 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
+<!-- Flash success -->
 <c:if test="${not empty sessionScope.flash_success}">
   <section class="container mt-2">
-    <div class="alert success">
-      ${sessionScope.flash_success}
-    </div>
+    <div class="alert success">${sessionScope.flash_success}</div>
   </section>
-  <c:remove var="flash_success" scope="session" />
+  <c:remove var="flash_success" scope="session"/>
 </c:if>
 
 <section class="hero">
@@ -19,20 +18,25 @@
 </section>
 
 <section class="container mt-3">
+
+  <!-- Error message -->
   <c:if test="${not empty error}">
     <div class="alert error">${error}</div>
   </c:if>
 
+  <!-- Availability Search -->
   <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
     <div class="grid grid-3">
       <div>
-        <label for="in">Check In Date</label>
-        <input id="in" name="check_in" type="date" value="${check_in != null ? check_in : param.check_in}" required />
+        <label for="check_in">Check In Date</label>
+        <input id="check_in" name="check_in" type="date"
+               value="${check_in != null ? check_in : param.check_in}" required />
       </div>
 
       <div>
-        <label for="out">Check Out Date</label>
-        <input id="out" name="check_out" type="date" value="${check_out != null ? check_out : param.check_out}" required />
+        <label for="check_out">Check Out Date</label>
+        <input id="check_out" name="check_out" type="date"
+               value="${check_out != null ? check_out : param.check_out}" required />
       </div>
 
       <div>
@@ -56,8 +60,6 @@
           <option value="4" ${(preferred_room_type_id == 4 || param.room_type_id == '4') ? 'selected' : ''}>King</option>
         </select>
       </div>
-      <div></div>
-      <div></div>
     </div>
 
     <input type="hidden" name="action" value="search"/>
@@ -67,23 +69,25 @@
     </div>
   </form>
 
+  <!-- Available rooms -->
   <c:if test="${not empty availableRooms}">
     <h2 class="section-title">Available Rooms</h2>
 
     <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
       <input type="hidden" name="action" value="reserve"/>
-
       <input type="hidden" name="check_in" value="${check_in}"/>
       <input type="hidden" name="check_out" value="${check_out}"/>
       <input type="hidden" name="guests" value="${guests}"/>
       <input type="hidden" name="room_type_id" value="${preferred_room_type_id}"/>
 
-      <div class="room-list-scroll" style="max-height:22rem; overflow-y:auto; padding:.5rem; border:1px solid #ddd; border-radius:6px;">
+      <div class="room-list-scroll"
+           style="max-height:22rem; overflow-y:auto; padding:.5rem; border:1px solid #ddd; border-radius:6px;">
         <fieldset class="stack" style="border:none; margin:0; padding:0;">
           <legend>Select a room</legend>
 
           <c:forEach var="opt" items="${availableRooms}">
-            <label class="card" style="display:grid; grid-template-columns:180px 1fr; gap:1rem; align-items:center; margin-bottom:.5rem;">
+            <label class="card"
+                   style="display:grid; grid-template-columns:180px 1fr; gap:1rem; align-items:center; margin-bottom:.5rem;">
               <div class="thumb">
                 <c:set var="prefix" value="DF"/>
                 <c:if test="${fn:startsWith(opt.roomNumber,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
@@ -97,7 +101,8 @@
               <div>
                 <div class="stack" style="gap:.25rem; align-items:flex-start;">
                   <div>
-                    <input type="radio" name="room_choice" value="${opt.roomId}:${opt.roomTypeId}" required />
+                    <input type="radio" name="room_choice"
+                           value="${opt.roomId}:${opt.roomTypeId}" required />
                     <strong>Room ${opt.roomNumber}</strong>
                   </div>
                   <div>${opt.roomTypeName} • Max ${opt.maxGuests} guests • $${opt.nightlyRate}/night</div>
@@ -113,6 +118,7 @@
         <button type="submit" class="btn">Reserve Selected Room</button>
       </div>
     </form>
+
   </c:if>
 </section>
 

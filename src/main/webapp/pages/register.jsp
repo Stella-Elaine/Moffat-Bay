@@ -12,22 +12,23 @@
     <div class="alert success">${success}</div>
   </c:if>
 
-  <form class="card" action="<c:url value='/register'/>" method="post" novalidate>
+  <form class="card" action="<c:url value='/register'/>" method="post">
+
     <div class="grid grid-2">
       <div>
         <label for="first">First Name</label>
-        <input id="first" name="first_name" type="text" required />
+        <input id="first" name="first_name" type="text" autocomplete="given-name" required />
       </div>
       <div>
         <label for="last">Last Name</label>
-        <input id="last" name="last_name" type="text" required />
+        <input id="last" name="last_name" type="text" autocomplete="family-name" required />
       </div>
     </div>
 
     <div class="grid grid-2 mt-2">
       <div>
-        <label for="email">Email (used as username)</label>
-        <input id="email" name="email" type="email" required />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
       </div>
       <div>
         <label for="phone">Telephone</label>
@@ -43,6 +44,7 @@
         type="password"
         pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}"
         minlength="8"
+        title="Min 8 characters, including 1 number, 1 uppercase and 1 lowercase letter"
         required
       />
     </div>
@@ -55,10 +57,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     const flash = document.querySelector(".alert.success");
     if (flash) {
-      setTimeout(() => {
-        flash.style.transition = "opacity 0.8s ease";
-        flash.style.opacity = "0";
-      }, 5000);
+      setTimeout(() => (flash.style.opacity = "0"), 5000);
     }
   });
 </script>

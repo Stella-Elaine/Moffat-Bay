@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/styles.css">
 
 <section class="container">
   <h1 class="section-title">Reservation Summary</h1>
@@ -15,6 +14,7 @@
 
   <c:if test="${not empty summary}">
     <div class="grid grid-2">
+
       <figure class="card">
         <div class="thumb">
           <c:set var="firstRoom" value="${summary.roomNumbers[0]}"/>
@@ -49,12 +49,8 @@
                 if (sum != null && sum.getCheckIn() != null && sum.getCheckOut() != null) {
                   long nights = java.time.temporal.ChronoUnit.DAYS.between(sum.getCheckIn(), sum.getCheckOut());
                   out.print(nights + (nights == 1 ? " night" : " nights"));
-                } else {
-                  out.print("N/A");
-                }
-              } catch (Exception e) {
-                out.print("N/A");
-              }
+                } else { out.print("N/A"); }
+              } catch (Exception e) { out.print("N/A"); }
             %>
           </dd>
 
@@ -71,12 +67,14 @@
           <dd>$<fmt:formatNumber value="${summary.totalCost}" type="number" minFractionDigits="2"/></dd>
 
           <dt>Status:</dt>
-          <dd><span class="${summary.status == 'Cancelled' ? 'status-cancelled' : ''}">
-            ${summary.status == 'Cancelled' ? 'CANCELLED' : summary.status}
-          </span></dd>
+          <dd>
+            <span class="${summary.status == 'Cancelled' ? 'status-cancelled' : ''}">
+              ${summary.status == 'Cancelled' ? 'CANCELLED' : summary.status}
+            </span>
+          </dd>
         </dl>
 
-        <div class="mt-2 stack" style="grid-auto-flow:row; grid-template-columns:none">
+        <div class="mt-2 stack" style="grid-auto-flow:row;">
           <c:if test="${summary.status != 'Cancelled'}">
             <form method="post" action="${pageContext.request.contextPath}/reservation-cancel" style="display:inline">
               <input type="hidden" name="id" value="${summary.reservationId}"/>
@@ -86,6 +84,7 @@
 
           <a class="btn" href="<c:url value='/pages/index.jsp'/>">Return to Home</a>
         </div>
+
       </div>
     </div>
   </c:if>
@@ -96,7 +95,7 @@
   #cancelBackdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); }
   #cancelContent {
     position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
-    background:#fff; padding:20px; border-radius:8px; max-width:90%; width:360px;
+    background:#fff; padding:20px; border-radius:8px; width:360px; max-width:90%;
     box-shadow:0 8px 24px rgba(0,0,0,.2);
   }
   #cancelContent h2 { margin:0 0 8px; font-size:1.1rem; }
@@ -107,11 +106,11 @@
 
 <div id="cancelModal" aria-hidden="true">
   <div id="cancelBackdrop"></div>
-  <div id="cancelContent" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
-    <h2 id="cancelTitle">Reservation cancelled</h2>
+  <div id="cancelContent">
+    <h2>Reservation cancelled</h2>
     <p id="cancelMessage">Your reservation has been cancelled.</p>
     <div style="text-align:right;">
-      <button id="closeCancel" type="button">OK</button>
+      <button id="closeCancel">OK</button>
     </div>
   </div>
 </div>
@@ -155,6 +154,10 @@
       document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     }
   }
+
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", init)
+    : init();
 })();
 </script>
 
