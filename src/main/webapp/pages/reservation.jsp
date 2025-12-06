@@ -91,6 +91,7 @@
               <div class="thumb">
                 <c:set var="prefix" value="DF"/>
                 <c:if test="${fn:startsWith(opt.roomNumber,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
+                <c:if test="${fn.startsWith(opt.roomNumber,'DF')}"><c:set var="prefix" value="DF"/></c:if>
                 <c:if test="${fn:startsWith(opt.roomNumber,'Q')}"><c:set var="prefix" value="Q"/></c:if>
                 <c:if test="${fn:startsWith(opt.roomNumber,'K')}"><c:set var="prefix" value="K"/></c:if>
 
