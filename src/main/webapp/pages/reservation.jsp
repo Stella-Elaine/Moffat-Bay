@@ -26,6 +26,7 @@
 
   <!-- Availability Search -->
   <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
+    <input type="hidden" name="action" value="reserve" />
     <div class="grid grid-3">
       <div>
         <label for="check_in">Check In Date</label>
@@ -69,7 +70,6 @@
     </div>
   </form>
 
-  <!-- Available rooms -->
   <c:if test="${not empty availableRooms}">
     <h2 class="section-title">Available Rooms</h2>
 
