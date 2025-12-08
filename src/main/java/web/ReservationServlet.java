@@ -7,6 +7,7 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -14,6 +15,17 @@ import java.time.temporal.ChronoUnit;
 @WebServlet(name = "ReservationServlet", urlPatterns = {"/reserve"})
 public class ReservationServlet extends HttpServlet {
   private final ReservationDao reservations = new ReservationDao();
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    HttpSession session = req.getSession(false);
+    if (session == null || session.getAttribute("customerId") == null) {
+      resp.sendRedirect(req.getContextPath() + "/pages/login.jsp");
+      return;
+    }
+    // Authenticated user accessing via GET - forward to reservation page
+    req.getRequestDispatcher("/pages/reservation.jsp").forward(req, resp);
+  }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -92,23 +104,35 @@ public class ReservationServlet extends HttpServlet {
         String[] parts = choice.split(":");
         int roomId = Integer.parseInt(parts[0]);
         int chosenRoomTypeId = Integer.parseInt(parts[1]);
-        // Re-validate availability (race condition safe)
+        
+        // Re-validate availability (race condition check)
         if (!reservations.isRoomAvailable(roomId, checkIn, checkOut)) {
           req.setAttribute("error", "That room was just booked. Please search again.");
           req.getRequestDispatcher("/pages/reservation.jsp").forward(req, resp);
           return;
         }
+        
         // Price calculation
         BigDecimal nightly = reservations.getNightlyRate(chosenRoomTypeId);
         long nights = ChronoUnit.DAYS.between(checkIn, checkOut);
         BigDecimal total = nightly.multiply(BigDecimal.valueOf(nights));
 
-        int reservationId = reservations.createReservation(customerId, numGuests, checkIn, checkOut, total);
-        if (reservationId < 0) throw new ServletException("Failed to create reservation");
-        reservations.assignRoomToReservation(reservationId, roomId);
-        session.setAttribute("reservationId", reservationId);
-        resp.sendRedirect(req.getContextPath() + "/reservation-summary?id=" + reservationId);
-        return;
+        try {
+          int reservationId = reservations.createReservation(customerId, numGuests, checkIn, checkOut, total);
+          if (reservationId < 0) throw new ServletException("Failed to create reservation");
+          reservations.assignRoomToReservation(reservationId, roomId);
+          session.setAttribute("reservationId", reservationId);
+          resp.sendRedirect(req.getContextPath() + "/reservation-summary?id=" + reservationId);
+          return;
+        } catch (SQLException e) {
+          // Check if it's a duplicate key or constraint violation (room already booked)
+          if (e.getMessage() != null && (e.getMessage().contains("Duplicate") || e.getMessage().contains("constraint"))) {
+            req.setAttribute("error", "That room is no longer available. Please search again.");
+            req.getRequestDispatcher("/pages/reservation.jsp").forward(req, resp);
+            return;
+          }
+          throw e;
+        }
       }
 
       req.setAttribute("error", "Unknown action.");

@@ -13,6 +13,7 @@
   </c:if>
 
   <form class="card" action="<c:url value='/register'/>" method="post">
+    <input type="hidden" name="csrf_token" value="${sessionScope.csrfToken}" />
 
     <div class="grid grid-2">
       <div>
@@ -42,7 +43,7 @@
         id="pw"
         name="password"
         type="password"
-        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}"
+        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
         minlength="8"
         title="Min 8 characters, including 1 number, 1 uppercase and 1 lowercase letter"
         required

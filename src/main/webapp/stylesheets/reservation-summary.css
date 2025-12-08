@@ -1,0 +1,178 @@
+.reservation-summary-page { max-width: 800px; margin: 2rem auto; }
+
+.summary-wrapper { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+
+.summary-header { 
+  background: linear-gradient(135deg, #2c5364 0%, #203a43 100%);
+  color: white; 
+  padding: 2.5rem 2rem; 
+  text-align: center; 
+}
+
+.confirmation-badge svg { 
+  color: #4ade80; 
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.confirmation-badge h2 { 
+  margin: 0.5rem 0 0.25rem; 
+  font-size: 1.75rem; 
+  font-weight: 600;
+}
+
+.ref-number { 
+  margin: 0.25rem 0 0; 
+  opacity: 0.9; 
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.summary-grid { 
+  display: grid; 
+  gap: 1.5rem; 
+  padding: 2rem; 
+}
+
+.room-preview { 
+  padding: 0; 
+  overflow: hidden;
+}
+
+.room-preview .thumb img { 
+  width: 100%; 
+  height: 220px; 
+  object-fit: cover; 
+}
+
+.room-info { 
+  padding: 1.25rem; 
+  background: #f9fafb;
+}
+
+.room-info h3 { 
+  margin: 0 0 0.5rem; 
+  font-size: 1.25rem; 
+  color: #1f2937;
+}
+
+.room-numbers { 
+  margin: 0; 
+  color: #6b7280; 
+  font-size: 0.95rem;
+}
+
+.booking-details { 
+  padding: 1.5rem; 
+}
+
+.booking-details h3 { 
+  margin: 0 0 1.25rem; 
+  font-size: 1.15rem; 
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.75rem;
+}
+
+.detail-row { 
+  display: flex; 
+  justify-content: space-between; 
+  padding: 0.75rem 0; 
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.detail-row.total { 
+  border-top: 2px solid #e5e7eb;
+  border-bottom: none;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  font-weight: 600;
+}
+
+.detail-row .label { 
+  color: #6b7280; 
+  font-size: 0.95rem;
+}
+
+.detail-row .value { 
+  color: #1f2937; 
+  font-weight: 500;
+}
+
+.detail-row.total .value.price { 
+  font-size: 1.5rem; 
+  color: #059669;
+}
+
+.status-banner { 
+  margin-top: 1rem; 
+  padding: 1rem; 
+  text-align: center; 
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+
+.status-banner.cancelled { 
+  background: #fee2e2; 
+  color: #dc2626; 
+  border: 2px solid #fecaca;
+}
+
+.action-buttons { 
+  display: flex; 
+  gap: 1rem; 
+  padding: 1.5rem 2rem 2rem; 
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cancel-form { margin: 0; }
+
+.btn-primary { 
+  background: #2c5364; 
+  color: white; 
+  border: none;
+}
+
+.btn-primary:hover { 
+  background: #203a43; 
+}
+
+.btn-secondary { 
+  background: white; 
+  color: #dc2626; 
+  border: 2px solid #dc2626;
+}
+
+.btn-secondary:hover { 
+  background: #fee2e2; 
+}
+
+@media (max-width: 768px) {
+  .summary-header { padding: 2rem 1rem; }
+  .summary-grid { padding: 1rem; gap: 1rem; }
+  .action-buttons { flex-direction: column; padding: 1rem; }
+  .action-buttons .btn { width: 100%; }
+  .detail-row.total .value.price { font-size: 1.25rem; }
+}
+
+#cancelModal { display:none; position:fixed; inset:0; z-index:1000; }
+#cancelBackdrop { position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter: blur(2px); }
+#cancelContent {
+  position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+  background:#fff; padding:2rem; border-radius:12px; width:400px; max-width:90%;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+#cancelContent h2 { margin:0 0 1rem; font-size:1.5rem; color:#1f2937; }
+#cancelContent p { margin:0 0 1.5rem; color:#6b7280; line-height:1.6; }
+#closeCancel { 
+  padding: 0.75rem 2rem; 
+  background: #2c5364; 
+  color: white; 
+  border: none; 
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#closeCancel:hover { background: #203a43; }
