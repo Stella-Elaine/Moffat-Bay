@@ -318,7 +318,7 @@ textarea:focus {
   box-shadow: 0 0 0 2px rgba(178, 107, 69, 0.2);
 }
 
-/* Alerts (flash messages) */
+/* Alerts */
 
 .alert {
   padding: 0.75rem 1rem;
@@ -340,7 +340,7 @@ textarea:focus {
 }
 
 /* ---------------------------------------------------
-   Tables (Lookup / Summary)
+   Tables
 --------------------------------------------------- */
 
 .table {
@@ -405,8 +405,6 @@ textarea:focus {
   gap: 0.5rem;
 }
 
-/* Social icons */
-
 .icon-sm {
   width: 26px;
   height: 26px;
@@ -416,15 +414,12 @@ textarea:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* Extra spacing between icons */
 .footer-social .social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-right: 0.15rem;
 }
-
-/* Copyright line */
 
 .copyright {
   max-width: 1040px;
@@ -462,7 +457,7 @@ textarea:focus {
 }
 
 /* ---------------------------------------------------
-   About / Contact section
+   About / Contact
 --------------------------------------------------- */
 
 #contact h1 {

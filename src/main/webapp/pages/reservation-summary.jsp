@@ -21,7 +21,7 @@
           <c:set var="prefix" value="DF"/>
 
           <c:if test="${fn:startsWith(firstRoom,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
-          <c:if test="${fn:startsWith(firstRoom,'DF')}"><c:set var="prefix" value="DF"/></c:if>
+          <c:if test="${fn.startsWith(firstRoom,'DF')}"><c:set var="prefix" value="DF"/></c:if>
           <c:if test="${fn:startsWith(firstRoom,'Q')}"><c:set var="prefix" value="Q"/></c:if>
           <c:if test="${fn:startsWith(firstRoom,'K')}"><c:set var="prefix" value="K"/></c:if>
 
@@ -163,6 +163,10 @@
       document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     }
   }
+
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", init)
+    : init();
 })();
 </script>
 
