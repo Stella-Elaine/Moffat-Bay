@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <%@ include file="/WEB-INF/includes/header.jsp" %>
 
 <section class="container lookup-page">
@@ -51,10 +54,20 @@
           <c:forEach var="r" items="${results}">
             <tr>
               <td>${r.reservationId}</td>
-              <td>${r.checkIn}</td>
-              <td>${r.checkOut}</td>
+
+              <!-- Format Check-In -->
+              <td>
+                <fmt:formatDate value="${r.checkIn}" pattern="MM-dd-yyyy"/>
+              </td>
+
+              <!-- Format Check-Out -->
+              <td>
+                <fmt:formatDate value="${r.checkOut}" pattern="MM-dd-yyyy"/>
+              </td>
+
               <td>${r.status}</td>
-              <td>$${r.totalCost}</td>
+              <td>$<fmt:formatNumber value="${r.totalCost}" minFractionDigits="2"/></td>
+
               <td class="actions-col">
                 <a class="btn btn-small"
                    href="<c:url value='/reservation-summary?id=${r.reservationId}'/>">

@@ -21,7 +21,7 @@
           <c:set var="prefix" value="DF"/>
 
           <c:if test="${fn:startsWith(firstRoom,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
-          <c:if test="${fn.startsWith(firstRoom,'DF')}"><c:set var="prefix" value="DF"/></c:if>
+          <c:if test="${fn:startsWith(firstRoom,'DF')}"><c:set var="prefix" value="DF"/></c:if>
           <c:if test="${fn:startsWith(firstRoom,'Q')}"><c:set var="prefix" value="Q"/></c:if>
           <c:if test="${fn:startsWith(firstRoom,'K')}"><c:set var="prefix" value="K"/></c:if>
 
@@ -39,8 +39,16 @@
           <dt>Customer:</dt>
           <dd>${summary.customerFirstName} ${summary.customerLastName} (${summary.customerEmail})</dd>
 
-          <dt>Check-in date:</dt><dd>${summary.checkIn}</dd>
-          <dt>Check-out date:</dt><dd>${summary.checkOut}</dd>
+          <!-- FORMATTED DATES -->
+          <dt>Check-in date:</dt>
+          <dd>
+            <fmt:formatDate value="${summary.checkIn}" pattern="MM-dd-yyyy"/>
+          </dd>
+
+          <dt>Check-out date:</dt>
+          <dd>
+            <fmt:formatDate value="${summary.checkOut}" pattern="MM-dd-yyyy"/>
+          </dd>
 
           <dt>Number of nights:</dt>
           <dd>
@@ -155,10 +163,6 @@
       document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     }
   }
-
-  document.readyState === "loading"
-    ? document.addEventListener("DOMContentLoaded", init)
-    : init();
 })();
 </script>
 
