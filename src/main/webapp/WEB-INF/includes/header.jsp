@@ -6,7 +6,6 @@
   <meta charset="UTF-8" />
   <title>Moffat Bay Lodge</title>
   <link rel="stylesheet" href="<c:url value='/stylesheets/styles.css' />">
-
 </head>
 <body>
 <header class="site-header">

@@ -16,12 +16,7 @@
     <div class="grid grid-2">
       <div class="field">
         <label for="resid">Reservation ID</label>
-        <input
-          id="resid"
-          name="reservation_id"
-          type="number"
-          min="1"
-        />
+        <input id="resid" name="reservation_id" type="number" min="1" />
         <p class="field-hint">
           Optional — leave blank to see all reservations for this email.
         </p>
@@ -29,12 +24,7 @@
 
       <div class="field">
         <label for="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          value="${email}"
-        />
+        <input id="email" name="email" type="email" value="${email}" />
       </div>
     </div>
 
