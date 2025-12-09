@@ -26,7 +26,8 @@
 
   <!-- Availability Search -->
   <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
-    <input type="hidden" name="action" value="reserve" />
+    <input type="hidden" name="csrf_token" value="${sessionScope.csrfToken}" />
+    <input type="hidden" name="action" value="search" />
     <div class="grid grid-3">
       <div>
         <label for="check_in">Check In Date</label>
@@ -63,8 +64,6 @@
       </div>
     </div>
 
-    <input type="hidden" name="action" value="search"/>
-
     <div class="mt-2">
       <button type="submit" class="btn">Search Availability</button>
     </div>
@@ -74,6 +73,7 @@
     <h2 class="section-title">Available Rooms</h2>
 
     <form class="card" method="post" action="${pageContext.request.contextPath}/reserve">
+      <input type="hidden" name="csrf_token" value="${sessionScope.csrfToken}" />
       <input type="hidden" name="action" value="reserve"/>
       <input type="hidden" name="check_in" value="${check_in}"/>
       <input type="hidden" name="check_out" value="${check_out}"/>

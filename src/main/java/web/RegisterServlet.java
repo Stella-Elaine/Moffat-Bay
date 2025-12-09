@@ -6,10 +6,13 @@ import jakarta.servlet.http.*;
 import dao.CustomerDao;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
   private final CustomerDao customers = new CustomerDao();
+  private static final Pattern PASSWORD_POLICY =
+      Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$");
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,10 +24,24 @@ public class RegisterServlet extends HttpServlet {
     String tel   = req.getParameter("telephone");
     String pw    = req.getParameter("password");
 
+    // Trim all inputs to avoid whitespace issues
+    if (first != null) first = first.trim();
+    if (last  != null) last  = last.trim();
+    if (email != null) email = email.trim();
+    if (tel   != null) tel   = tel.trim();
+    if (pw    != null) pw    = pw.trim();
+
     try {
       if (email == null || pw == null || first == null || last == null
           || email.isBlank() || pw.isBlank() || first.isBlank() || last.isBlank()) {
         req.setAttribute("error", "All required fields must be provided.");
+        req.getRequestDispatcher("/pages/register.jsp").forward(req, resp);
+        return;
+      }
+
+      // Enforce server-side password requirements
+      if (!PASSWORD_POLICY.matcher(pw).matches()) {
+        req.setAttribute("error", "Password must be at least 8 characters and include 1 uppercase, 1 lowercase, and 1 number.");
         req.getRequestDispatcher("/pages/register.jsp").forward(req, resp);
         return;
       }

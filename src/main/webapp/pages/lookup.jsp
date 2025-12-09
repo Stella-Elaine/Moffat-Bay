@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ include file="/WEB-INF/includes/header.jsp" %>
 
 <section class="container lookup-page">
@@ -51,8 +52,21 @@
           <c:forEach var="r" items="${results}">
             <tr>
               <td>${r.reservationId}</td>
-              <td>${r.checkIn}</td>
-              <td>${r.checkOut}</td>
+              <td>
+                <% 
+                  model.ReservationListItem item = (model.ReservationListItem) pageContext.getAttribute("r");
+                  if (item != null && item.getCheckIn() != null) {
+                    out.print(item.getCheckIn().format(java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                  }
+                %>
+              </td>
+              <td>
+                <% 
+                  if (item != null && item.getCheckOut() != null) {
+                    out.print(item.getCheckOut().format(java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                  }
+                %>
+              </td>
               <td>${r.status}</td>
               <td>$${r.totalCost}</td>
               <td class="actions-col">

@@ -4,106 +4,119 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <%@ include file="/WEB-INF/includes/header.jsp" %>
+<link rel="stylesheet" href="<c:url value='/stylesheets/reservation-summary.css' />">
 
-<section class="container">
-  <h1 class="section-title">Reservation Summary</h1>
+<section class="container reservation-summary-page">
+  <h1 class="section-title">Reservation Confirmation</h1>
 
   <c:if test="${not empty error}">
     <div class="alert error">${error}</div>
   </c:if>
 
   <c:if test="${not empty summary}">
-    <div class="grid grid-2">
-
-      <figure class="card">
-        <div class="thumb">
-          <c:set var="firstRoom" value="${summary.roomNumbers[0]}"/>
-          <c:set var="prefix" value="DF"/>
-
-          <c:if test="${fn:startsWith(firstRoom,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
-          <c:if test="${fn.startsWith(firstRoom,'DF')}"><c:set var="prefix" value="DF"/></c:if>
-          <c:if test="${fn:startsWith(firstRoom,'Q')}"><c:set var="prefix" value="Q"/></c:if>
-          <c:if test="${fn:startsWith(firstRoom,'K')}"><c:set var="prefix" value="K"/></c:if>
-
-          <c:set var="fileName" value="room-option-${prefix}.jpg"/>
-
-          <img alt="${summary.roomTypeName}" src="<c:url value='/photos/rooms/${fileName}'/>">
+    <div class="summary-wrapper">
+      
+      <div class="summary-header">
+        <div class="confirmation-badge">
+          <h2>Booking ${summary.status == 'Cancelled' ? 'Cancelled' : 'Confirmed'}</h2>
+          <p class="ref-number">Reference #${summary.reservationId}</p>
         </div>
-        <figcaption>${summary.roomTypeName}</figcaption>
-      </figure>
-
-      <div class="summary card">
-        <dl>
-          <dt>Reference number:</dt><dd>${summary.reservationId}</dd>
-
-          <dt>Customer:</dt>
-          <dd>${summary.customerFirstName} ${summary.customerLastName} (${summary.customerEmail})</dd>
-
-          <dt>Check-in date:</dt><dd>${summary.checkIn}</dd>
-          <dt>Check-out date:</dt><dd>${summary.checkOut}</dd>
-
-          <dt>Number of nights:</dt>
-          <dd>
-            <%
-              try {
-                model.ReservationSummary sum = (model.ReservationSummary) request.getAttribute("summary");
-                if (sum != null && sum.getCheckIn() != null && sum.getCheckOut() != null) {
-                  long nights = java.time.temporal.ChronoUnit.DAYS.between(sum.getCheckIn(), sum.getCheckOut());
-                  out.print(nights + (nights == 1 ? " night" : " nights"));
-                } else { out.print("N/A"); }
-              } catch (Exception e) { out.print("N/A"); }
-            %>
-          </dd>
-
-          <dt>Guests:</dt><dd>${summary.numGuests}</dd>
-
-          <dt>Room number(s):</dt>
-          <dd>
-            <c:forEach var="rn" items="${summary.roomNumbers}" varStatus="s">
-              ${rn}<c:if test="${!s.last}">, </c:if>
-            </c:forEach>
-          </dd>
-
-          <dt>Total:</dt>
-          <dd>$<fmt:formatNumber value="${summary.totalCost}" type="number" minFractionDigits="2"/></dd>
-
-          <dt>Status:</dt>
-          <dd>
-            <span class="${summary.status == 'Cancelled' ? 'status-cancelled' : ''}">
-              ${summary.status == 'Cancelled' ? 'CANCELLED' : summary.status}
-            </span>
-          </dd>
-        </dl>
-
-        <div class="mt-2 stack" style="grid-auto-flow:row;">
-          <c:if test="${summary.status != 'Cancelled'}">
-            <form method="post" action="${pageContext.request.contextPath}/reservation-cancel" style="display:inline">
-              <input type="hidden" name="id" value="${summary.reservationId}"/>
-              <button class="btn" type="submit">Cancel Booking</button>
-            </form>
-          </c:if>
-
-          <a class="btn" href="<c:url value='/pages/index.jsp'/>">Return to Home</a>
-        </div>
-
       </div>
+
+      <div class="summary-grid">
+        <div class="room-preview card">
+          <div class="thumb">
+            <c:set var="firstRoom" value="${summary.roomNumbers[0]}"/>
+            <c:set var="prefix" value="DF"/>
+            <c:if test="${fn:startsWith(firstRoom,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
+            <c:if test="${fn.startsWith(firstRoom,'DF')}"><c:set var="prefix" value="DF"/></c:if>
+            <c:if test="${fn:startsWith(firstRoom,'Q')}"><c:set var="prefix" value="Q"/></c:if>
+            <c:if test="${fn:startsWith(firstRoom,'K')}"><c:set var="prefix" value="K"/></c:if>
+            <c:set var="fileName" value="room-option-${prefix}.jpg"/>
+            <img alt="${summary.roomTypeName}" src="<c:url value='/photos/rooms/${fileName}'/>">
+          </div>
+          <div class="room-info">
+            <h3>${summary.roomTypeName}</h3>
+            <p class="room-numbers">
+              Room <c:forEach var="rn" items="${summary.roomNumbers}" varStatus="s">${rn}<c:if test="${!s.last}">, </c:if></c:forEach>
+            </p>
+          </div>
+        </div>
+
+        <div class="booking-details card">
+          <h3>Booking Details</h3>
+          <div class="detail-row">
+            <span class="label">Guest Name</span>
+            <span class="value">${summary.customerFirstName} ${summary.customerLastName}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Email</span>
+            <span class="value">${summary.customerEmail}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Check-In</span>
+            <span class="value">
+              <%
+                model.ReservationSummary sum = (model.ReservationSummary) request.getAttribute("summary");
+                if (sum != null && sum.getCheckIn() != null) {
+                  out.print(sum.getCheckIn().format(java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                }
+              %>
+            </span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Check-Out</span>
+            <span class="value">
+              <%
+                if (sum != null && sum.getCheckOut() != null) {
+                  out.print(sum.getCheckOut().format(java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                }
+              %>
+            </span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Duration</span>
+            <span class="value">
+              <%
+                try {
+                  if (sum != null && sum.getCheckIn() != null && sum.getCheckOut() != null) {
+                    long nights = java.time.temporal.ChronoUnit.DAYS.between(sum.getCheckIn(), sum.getCheckOut());
+                    out.print(nights + (nights == 1 ? " night" : " nights"));
+                  } else { out.print("N/A"); }
+                } catch (Exception e) { out.print("N/A"); }
+              %>
+            </span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Guests</span>
+            <span class="value">${summary.numGuests} ${summary.numGuests == 1 ? 'guest' : 'guests'}</span>
+          </div>
+          <div class="detail-row total">
+            <span class="label">Total Cost</span>
+            <span class="value price">$<fmt:formatNumber value="${summary.totalCost}" type="number" minFractionDigits="2"/></span>
+          </div>
+          <c:if test="${summary.status == 'Cancelled'}">
+            <div class="status-banner cancelled">
+              <strong>CANCELLED</strong>
+            </div>
+          </c:if>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <c:if test="${summary.status != 'Cancelled'}">
+          <form method="post" action="${pageContext.request.contextPath}/reservation-cancel" class="cancel-form">
+            <input type="hidden" name="csrf_token" value="${sessionScope.csrfToken}" />
+            <input type="hidden" name="id" value="${summary.reservationId}"/>
+            <button class="btn btn-secondary" type="submit">Cancel Booking</button>
+          </form>
+        </c:if>
+        <a class="btn btn-primary" href="<c:url value='/pages/index.jsp'/>">Return to Home</a>
+      </div>
+
     </div>
   </c:if>
 </section>
-
-<style>
-  #cancelModal { display:none; position:fixed; inset:0; z-index:1000; }
-  #cancelBackdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); }
-  #cancelContent {
-    position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
-    background:#fff; padding:20px; border-radius:8px; width:360px; max-width:90%;
-    box-shadow:0 8px 24px rgba(0,0,0,.2);
-  }
-  #cancelContent h2 { margin:0 0 8px; font-size:1.1rem; }
-  #cancelContent p { margin:0 0 16px; }
-  #closeCancel { padding:8px 14px; }
-  .status-cancelled { color:#dc3545; font-weight:bold; }
-</style>
 
 <div id="cancelModal" aria-hidden="true">
   <div id="cancelBackdrop"></div>
