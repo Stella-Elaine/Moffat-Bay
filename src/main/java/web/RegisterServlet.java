@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
         return;
       }
 
-      //  Test 0duplicate email check
+      //  Test duplicate email check
       if (customers.emailExists(email)) {
         req.setAttribute("error", "Email is already registered. Please log in instead.");
         req.getRequestDispatcher("/pages/register.jsp").forward(req, resp);
@@ -60,11 +60,11 @@ public class RegisterServlet extends HttpServlet {
       HttpSession session = req.getSession(true);
       session.setAttribute("customerId", id);
 
-      //  Test 3 success message shown on register.jsp
-      req.setAttribute("success", first + ", your account has been created successfully!");
+      //  Test 3 success message shown on reservation page
+      session.setAttribute("flash_success", first + ", you have been successfully registered and logged into your account!");
 
-      // Test 4  forward back to the same page to show the message
-      req.getRequestDispatcher("/pages/register.jsp").forward(req, resp);
+      // Test 4  redirect to reservation page
+      resp.sendRedirect(req.getContextPath() + "/pages/reservation.jsp");
 
     } catch (Exception e) {
       req.setAttribute("error", "Registration failed unexpectedly. Please try again.");
