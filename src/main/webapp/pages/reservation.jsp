@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div class="grid grid-3 mt-2">
+    <div class="grid grid-2 mt-3" style="align-items: flex-end;">
       <div>
         <label for="room">Room Selection</label>
         <select id="room" name="room_type_id">
@@ -62,10 +62,10 @@
           <option value="4" ${(preferred_room_type_id == 4 || param.room_type_id == '4') ? 'selected' : ''}>King</option>
         </select>
       </div>
-    </div>
 
-    <div class="mt-2">
-      <button type="submit" class="btn">Search Availability</button>
+      <div style="display: flex; justify-content: flex-end;">
+        <button type="submit" class="btn">Search Availability</button>
+      </div>
     </div>
   </form>
 
@@ -80,40 +80,34 @@
       <input type="hidden" name="guests" value="${guests}"/>
       <input type="hidden" name="room_type_id" value="${preferred_room_type_id}"/>
 
-      <div class="room-list-scroll"
-           style="max-height:22rem; overflow-y:auto; padding:.5rem; border:1px solid #ddd; border-radius:6px;">
-        <fieldset class="stack" style="border:none; margin:0; padding:0;">
-          <legend>Select a room</legend>
+      <fieldset class="room-list-scroll">
+        <legend>Select a room</legend>
 
-          <c:forEach var="opt" items="${availableRooms}">
-            <label class="card"
-                   style="display:grid; grid-template-columns:180px 1fr; gap:1rem; align-items:center; margin-bottom:.5rem;">
-              <div class="thumb">
-                <c:set var="prefix" value="DF"/>
-                <c:if test="${fn:startsWith(opt.roomNumber,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
-                <c:if test="${fn.startsWith(opt.roomNumber,'DF')}"><c:set var="prefix" value="DF"/></c:if>
-                <c:if test="${fn:startsWith(opt.roomNumber,'Q')}"><c:set var="prefix" value="Q"/></c:if>
-                <c:if test="${fn:startsWith(opt.roomNumber,'K')}"><c:set var="prefix" value="K"/></c:if>
+        <c:forEach var="opt" items="${availableRooms}">
+          <label class="card">
+            <div class="thumb">
+              <c:set var="prefix" value="DF"/>
+              <c:if test="${fn:startsWith(opt.roomNumber,'DQ')}"><c:set var="prefix" value="DQ"/></c:if>
+              <c:if test="${fn.startsWith(opt.roomNumber,'DF')}"><c:set var="prefix" value="DF"/></c:if>
+              <c:if test="${fn:startsWith(opt.roomNumber,'Q')}"><c:set var="prefix" value="Q"/></c:if>
+              <c:if test="${fn:startsWith(opt.roomNumber,'K')}"><c:set var="prefix" value="K"/></c:if>
 
-                <c:set var="fileName" value="room-option-${prefix}.jpg"/>
-                <img alt="${opt.roomTypeName}" src="<c:url value='/photos/rooms/${fileName}'/>"/>
+              <c:set var="fileName" value="room-option-${prefix}.jpg"/>
+              <img alt="${opt.roomTypeName}" src="<c:url value='/photos/rooms/${fileName}'/>"/>
+            </div>
+
+            <div style="padding: 0.75rem 0;">
+              <div style="margin-bottom: 0.5rem;">
+                <input type="radio" name="room_choice"
+                       value="${opt.roomId}:${opt.roomTypeId}" required />
+                <strong>Room ${opt.roomNumber}</strong>
               </div>
+              <div>${opt.roomTypeName} • Max ${opt.maxGuests} guests • $${opt.nightlyRate}/night</div>
+            </div>
+          </label>
+        </c:forEach>
 
-              <div>
-                <div class="stack" style="gap:.25rem; align-items:flex-start;">
-                  <div>
-                    <input type="radio" name="room_choice"
-                           value="${opt.roomId}:${opt.roomTypeId}" required />
-                    <strong>Room ${opt.roomNumber}</strong>
-                  </div>
-                  <div>${opt.roomTypeName} • Max ${opt.maxGuests} guests • $${opt.nightlyRate}/night</div>
-                </div>
-              </div>
-            </label>
-          </c:forEach>
-
-        </fieldset>
-      </div>
+      </fieldset>
 
       <div class="mt-2">
         <button type="submit" class="btn">Reserve Selected Room</button>
