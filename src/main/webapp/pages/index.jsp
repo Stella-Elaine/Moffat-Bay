@@ -27,6 +27,9 @@
 <section class="band">
   <div class="container grid grid-3">
     <div class="card">
+      <div class="thumb">
+        <img alt="Warm lodge rooms with wood finishes" src="<c:url value='/photos/amenities-room-view.jpg'/>">
+      </div>
       <span class="badge">Rooms & Rates</span>
       <h3>Warm lodge rooms with wood finishes</h3>
       <p>Double Full, Queen, Double Queen, and King—straightforward nightly pricing.</p>
@@ -34,6 +37,9 @@
     </div>
 
     <div class="card">
+      <div class="thumb">
+        <img alt="Island activities and outdoor adventures" src="<c:url value='/photos/Moran-state-park.jpg'/>">
+      </div>
       <span class="badge">Island Activities</span>
       <h3>Trails, kayaks, whales & cold-water diving</h3>
       <p>Explore Moran State Park, sheltered coves, and seasonal wildlife around Moffat Bay.</p>
@@ -41,6 +47,9 @@
     </div>
 
     <div class="card">
+      <div class="thumb">
+        <img alt="Find your reservation" src="<c:url value='/photos/amenities-balcony-view.jpg'/>">
+      </div>
       <span class="badge">Already Booked?</span>
       <h3>Find your reservation</h3>
       <p>Look up using your reservation ID or the email you registered with.</p>

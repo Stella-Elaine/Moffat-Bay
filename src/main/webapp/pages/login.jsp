@@ -8,7 +8,7 @@
     <div class="alert error">${error}</div>
   </c:if>
 
-  <form class="card" action="<c:url value='/login'/>" method="post">
+  <form class="card simple-form" action="<c:url value='/login'/>" method="post">
     <input type="hidden" name="csrf_token" value="${sessionScope.csrfToken}" />
     <label for="email">Email</label>
     <input id="email" name="email" type="email" required />

@@ -43,14 +43,26 @@
 <section class="band">
   <div class="container grid grid-3">
     <div class="card">
+      <div class="thumb">
+        <img alt="Welcome sign"
+             src="<c:url value='/photos/welcome-sign.webp' />">
+      </div>
       <h3>Check-In / Check-Out</h3>
       <p>Check-in from 3:00 PM • Check-out at 11:00 AM.</p>
     </div>
     <div class="card">
+      <div class="thumb">
+        <img alt="In-room coffee"
+             src="<c:url value='/photos/amenities-coffee.webp' />">
+      </div>
       <h3>Amenities</h3>
       <p>Wi-Fi, streaming TVs, mini-fridge, in-room coffee, and trail maps at the front desk.</p>
     </div>
     <div class="card">
+      <div class="thumb">
+        <img alt="Lighthouse coast"
+             src="<c:url value='/photos/hero-lighthouse-coast.jpg' />">
+      </div>
       <h3>Parking & Access</h3>
       <p>Guest parking available at the lodge. The walk to the shoreline outlook is level and lit.</p>
     </div>

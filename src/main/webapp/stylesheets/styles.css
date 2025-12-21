@@ -12,6 +12,12 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+html {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -20,17 +26,22 @@ body {
   background: #f8f1e9;
   color: #3b2415;
   line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Basic links */
 
 a {
-  color: #8a4023;
+  color: #6b8e6f;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover,
 a:focus {
+  color: #5a7a5e;
   text-decoration: underline;
 }
 
@@ -52,8 +63,16 @@ a:focus {
   padding: 0 1.5rem;
 }
 
+.container.mt-3 {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
 .page-content {
   padding: 2.5rem 0 3.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---------------------------------------------------
@@ -66,6 +85,7 @@ a:focus {
   z-index: 20;
   background: #fdf7f0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
 }
 
 .site-header .brand {
@@ -88,11 +108,12 @@ a:focus {
   font-weight: 500;
   letter-spacing: 0.02em;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .site-header nav a:hover,
 .site-header nav a:focus {
-  color: #b65832;
+  color: #6b8e6f;
 }
 
 /* Stack header on small screens */
@@ -147,6 +168,10 @@ a:focus {
                1px 1px 3px rgba(0, 0, 0, 0.8);
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+h2.section-title {
+  margin-top: 2rem;
 }
 
 .hero p {
@@ -205,8 +230,48 @@ a:focus {
 .card {
   background: #ffffff;
   border-radius: 0.75rem;
-  padding: 1.4rem 1.35rem;
+  padding: 1.6rem 1.5rem;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.card .btn {
+  margin-top: auto;
+  align-self: center;
+}
+
+form.card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  padding: 1.6rem 1.5rem;
+}
+
+form.card .room-list-scroll {
+  grid-row: 2;
+  margin: 0;
+}
+
+form.card .mt-2 {
+  grid-row: 3;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* Override for simple forms (e.g., login) to avoid grid row pinning */
+form.card.simple-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form.card.simple-form .mt-2 {
+  margin-top: 1rem;
+  align-self: center;
+  display: inline-flex;
+  justify-content: center;
 }
 
 /* Media thumb inside cards */
@@ -227,9 +292,11 @@ a:focus {
 /* Band sections */
 
 .band {
-  background: #f1e2d4;
-  padding: 2.5rem 0;
-  margin-top: 2.25rem;
+  background: linear-gradient(135deg, #f1e2d4 0%, #e8f0eb 100%);
+  padding: 3rem 0;
+  margin-top: 3.5rem;
+  border-top: 1px solid #d9cfc5;
+  border-bottom: 1px solid #d9cfc5;
 }
 
 /* Section titles */
@@ -237,8 +304,9 @@ a:focus {
 .section-title {
   font-family: "Georgia", "Times New Roman", serif;
   font-size: 1.6rem;
-  margin: 0 0 1.25rem;
+  margin: 1.5rem 0 1.75rem;
   color: #3b2415;
+  padding-top: 0.5rem;
 }
 
 /* Badge */
@@ -265,8 +333,8 @@ a:focus {
   justify-content: center;
   padding: 0.55rem 1.4rem;
   border-radius: 999px;
-  border: 2px solid #8a4023;
-  background: #8a4023;
+  border: 2px solid #6b8e6f;
+  background: #6b8e6f;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
@@ -282,8 +350,8 @@ a:focus {
 
 .btn:hover,
 .btn:focus {
-  background: #a9532d;
-  border-color: #a9532d;
+  background: #5a7a5e;
+  border-color: #5a7a5e;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
               0 3px 6px rgba(0, 0, 0, 0.4),
               inset 0 1px 0 rgba(255, 255, 255, 0.25);
@@ -291,16 +359,16 @@ a:focus {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.9);
-  color: #8a4023;
-  border: 2px solid #8a4023;
+  background: rgba(255, 255, 255, 0.95);
+  color: #6b8e6f;
+  border: 2px solid #6b8e6f;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
               0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-outline:hover,
 .btn-outline:focus {
-  background: #8a4023;
+  background: #6b8e6f;
   color: #ffffff;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
               0 3px 6px rgba(0, 0, 0, 0.4);
@@ -338,8 +406,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #b26b45;
-  box-shadow: 0 0 0 2px rgba(178, 107, 69, 0.2);
+  border-color: #6b8e6f;
+  box-shadow: 0 0 0 2px rgba(107, 142, 111, 0.2);
 }
 
 /* Alerts */
@@ -396,18 +464,18 @@ textarea:focus {
 --------------------------------------------------- */
 
 .site-footer {
-  background: #4b2b17;
+  background: linear-gradient(180deg, #f8f1e9 0%, #2d4a3a 100%);
   color: #f9f1e7;
-  padding: 1.7rem 1.5rem 1.4rem;
+  margin-top: auto;
 }
 
 .footer-content {
   max-width: 1040px;
-  margin: 0 auto;
+  margin: 0 auto 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 1rem;
   flex-wrap: wrap;
   font-size: 0.9rem;
 }
@@ -523,13 +591,64 @@ textarea:focus {
    Animations
 --------------------------------------------------- */
 
-.attraction-card {
+.card {
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-.attraction-card:hover {
+.card:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------------------------------------------------
+   Reservation Page Styles
+--------------------------------------------------- */
+
+.hero {
+  margin-bottom: 2.5rem;
+}
+
+.room-list-scroll {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 1.5rem;
+  border: 1px solid #e0d2c7;
+  border-radius: 0.6rem;
+  background: #faf3ec;
+}
+
+.room-list-scroll fieldset {
+  grid-column: 1 / -1;
+  display: contents;
+}
+
+.room-list-scroll legend {
+  display: none;
+}
+
+.room-list-scroll label.card {
+  grid-column: unset;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: stretch;
+  margin-bottom: 0 !important;
+}
+
+.room-list-scroll .thumb {
+  margin-bottom: 0.75rem;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.room-list-scroll .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ---------------------------------------------------
